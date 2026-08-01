@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: "WorldIntelligence — Open-Source Intelligence, Mapped",
@@ -17,6 +18,7 @@ export default function RootLayout({
       <body style={{ margin: 0, padding: 0 }}>
         {children}
         <Toaster />
+        <Analytics />
       </body>
     </html>
   );
