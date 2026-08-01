@@ -2,7 +2,7 @@
 
 Real-time open-source intelligence (OSINT) platform. Interactive 2D/3D globe tracking military bases, conflict zones, nuclear facilities, critical infrastructure, naval assets, and breaking news — all in one command center.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/WorldIntelOSINT/WorldIntelligence)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/anythingeverything556-web/WorldIntelligence)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
@@ -54,7 +54,7 @@ Real-time open-source intelligence (OSINT) platform. Interactive 2D/3D globe tra
 ### 1. Clone
 
 ```bash
-git clone https://github.com/WorldIntelOSINT/WorldIntelligence.git
+git clone https://github.com/anythingeverything556-web/WorldIntelligence.git
 cd WorldIntelligence
 ```
 
