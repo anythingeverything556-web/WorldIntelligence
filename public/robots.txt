@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Allow: /console.html
+Allow: /intel-feed.html
+Allow: /privacy.html
+Allow: /assets/
+
+Disallow: /api/
+
+Sitemap: https://worldintelligence.vercel.app/sitemap.xml
+Host: https://worldintelligence.vercel.app

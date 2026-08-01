@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Live 24/7 intelligence news feed — 15 verified news channels streamed live on one screen." />
+    <title>Intel Feed — WorldIntelligence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700;1,800;1,900&family=Crimson+Pro:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: #04050a;
+            color: #e8edf5; 
+            font-family: 'Inter', sans-serif;
+            height: 100vh; 
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Header */
+        #header {
+            height: 60px;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            z-index: 100;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            filter: drop-shadow(0 0 16px rgba(255,255,255,0.4));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .logo-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 22px;
+            font-weight: 800;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #ffffff;
+        }
+
+        .logo-accent {
+            font-size: 22px;
+            font-weight: 900;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #ffffff;
+        }
+
+        .status-section {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 8px #22c55e;
+            animation: pulse 2s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.6); }
+            60% { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
+        }
+
+        .live-text {
+            font-size: 11px;
+            font-weight: 700;
+            font-family: 'Crimson Pro', serif;
+            font-style: italic;
+            letter-spacing: 0.28em;
+            color: #22c55e;
+        }
+
+        /* Main Content */
+        #main-content {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* Player Section */
+        #player-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #000;
+        }
+
+        #video-player {
+            flex: 1;
+            position: relative;
+        }
+
+        #video-player iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        #player-controls {
+            height: 72px;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #080b14;
+            border-top: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .channel-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .channel-name {
+            font-size: 18px;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .channel-status {
+            font-size: 12px;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 0.05em;
+            color: #a0b0c5;
+        }
+
+        .clock-display {
+            font-size: 13px;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 0.12em;
+            color: #ffffff;
+        }
+
+        /* Sidebar */
+        #sidebar {
+            width: 380px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(180deg, rgba(14,17,28,0.6) 0%, rgba(8,11,20,0.6) 100%);
+            border-left: 1px solid rgba(255,255,255,0.07);
+            backdrop-filter: blur(24px) saturate(180%);
+        }
+
+        #sidebar-header {
+            height: 56px;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(90deg, rgba(255,255,255,0.08) 0%, transparent 100%);
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .sidebar-title {
+            font-size: 11px;
+            font-weight: 800;
+            font-family: 'Crimson Pro', serif;
+            font-style: italic;
+            letter-spacing: 0.28em;
+            color: #ffffff;
+        }
+
+        #channel-list {
+            flex: 1;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255,255,255,0.2) transparent;
+        }
+
+        #channel-list::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        #channel-list::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, rgba(255,255,255,0.3), rgba(249,115,22,0.2));
+            border-radius: 4px;
+        }
+
+        /* Channel Card */
+        .channel-card {
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.04) 100%), rgba(10,13,22,0.6);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+            flex-shrink: 0;
+        }
+
+        .channel-card:hover {
+            background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.06) 100%), rgba(10,13,22,0.6);
+            border-color: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255,255,255,0.12);
+        }
+
+        .channel-card.active {
+            background: linear-gradient(135deg, rgba(249,115,22,0.1) 0%, rgba(255,255,255,0.06) 100%), rgba(10,13,22,0.6);
+            border-color: rgba(249,115,22,0.4);
+            box-shadow: 0 8px 32px rgba(249,115,22,0.2), inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+
+        .channel-thumbnail {
+            width: 100%;
+            height: 200px;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+            background: #1a1d28;
+        }
+
+        .channel-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .channel-name-overlay {
+            padding: 12px 14px;
+            text-align: center;
+        }
+
+        .channel-name-text {
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Crimson Pro', serif;
+            color: #e8edf5;
+        }
+
+        @media (max-width: 900px) {
+            #main-content {
+                flex-direction: column;
+            }
+            #sidebar {
+                width: 100%;
+                height: 300px;
+                border-left: none;
+                border-top: 1px solid rgba(255,255,255,0.07);
+            }
+            #channel-list {
+                flex-direction: row;
+                overflow-x: auto;
+            }
+            .channel-card {
+                flex: 0 0 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <div class="logo-section">
+            <div class="logo-img">
+            <img src="/assets/img/logo.png" alt="WorldIntelligence" width="32" height="32">
+            </div>
+            <span class="logo-text">World</span><span class="logo-accent">Intelligence</span>
+        </div>
+        <div class="status-section">
+            <div class="live-dot"></div>
+            <span class="live-text">SITUATION ROOM</span>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <div id="player-section">
+            <div id="video-player">
+                <iframe id="main-player" title="Live news video player" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+            <div id="player-controls">
+                <div class="channel-info">
+                    <h2 class="channel-name" id="cur-name">Al Jazeera English</h2>
+                    <div class="channel-status">LIVE • 1080P • ENCRYPTED STREAM</div>
+                </div>
+                <div class="clock-display" id="clock">00:00:00 UTC</div>
+            </div>
+        </div>
+
+        <div id="sidebar">
+            <div id="sidebar-header">
+                <div class="sidebar-title">AVAILABLE FEEDS</div>
+            </div>
+            <div id="channel-list"></div>
+        </div>
+    </div>
+
+    <script>
+        window.NEWS_CHANNELS = [
+            { id: 'aljazeera', name: 'Al Jazeera English', yt: 'gCNeDWCI0vo', logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/Aljazeera_eng.svg/240px-Aljazeera_eng.svg.png' },
+            { id: 'dw', name: 'DW News', yt: 'LuKwFajn37U', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Deutsche_Welle_symbol_2012.svg/240px-Deutsche_Welle_symbol_2012.svg.png' },
+            { id: 'euronews', name: 'Euronews', yt: 'evbAWPmwtSE', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Euronews_2016_logo.svg/240px-Euronews_2016_logo.svg.png' },
+            { id: 'trt', name: 'TRT World', yt: '1VUhRQpz_9o', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/TRT_World.svg/240px-TRT_World.svg.png' },
+            { id: 'reuters', name: 'Reuters', yt: 'TGu6Sb-gFoA', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Reuters_Logo.svg/240px-Reuters_Logo.svg.png' },
+            { id: 'france24', name: 'France 24 English', yt: 'Ap-UM1O9RBU', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/France24.svg/240px-France24.svg.png' },
+            { id: 'telesur', name: 'TeleSUR', yt: 'uGK8rHot0Pc', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/TeleSUR-Logo.svg/240px-TeleSUR-Logo.svg.png' },
+            { id: 'skynews', name: 'Sky News', yt: 'YDvsBbKfLPA', logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/8/8c/Sky_News_logo.svg/240px-Sky_News_logo.svg.png' },
+            { id: 'gbnews', name: 'GB News', yt: 'pMmp6K-18v0', logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/c/c6/GB_News_Logo.svg/240px-GB_News_Logo.svg.png' },
+            { id: 'abc', name: 'ABC News', yt: 'iipR5yUp36o', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/ABC_News_logo_2021.svg/240px-ABC_News_logo_2021.svg.png' },
+            { id: 'cspan', name: 'C-SPAN', yt: '2FCUaGniGMA', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/C-SPAN_logo.svg/240px-C-SPAN_logo.svg.png' },
+            { id: 'foxnews', name: 'Fox News Live', yt: 'C96oohpWBGw', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Fox_News_Channel_logo.svg/240px-Fox_News_Channel_logo.svg.png' },
+            { id: 'cnn18', name: 'CNN News18', yt: '7ewQqNXxlhY', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/CNN-News18_logo.svg/240px-CNN-News18_logo.svg.png' },
+            { id: 'bloomberg', name: 'Bloomberg TV', yt: 'iEpJwprxDdk', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Bloomberg_Television_logo.svg/240px-Bloomberg_Television_logo.svg.png' },
+            { id: 'cna', name: 'Channel NewsAsia', yt: 'XWq5kBlakcQ', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/CNA_new_logo.svg/240px-CNA_new_logo.svg.png' },
+            { id: 'toi', name: 'Times of India', yt: 'UzbN63TYWPo', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/The_Times_of_India_logo.svg/240px-The_Times_of_India_logo.svg.png' },
+            { id: 'ndtv', name: 'NDTV', yt: 'mCyA0DjT30E', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/NDTV_247.svg/240px-NDTV_247.svg.png' },
+            { id: 'republic', name: 'Republic World', yt: 'VHd_S-eY9ls', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Republic_TV.svg/240px-Republic_TV.svg.png' },
+            { id: 'wion', name: 'WION', yt: 'BoiGBuO3k6o', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/WION_news_Logo.svg/240px-WION_news_Logo.svg.png' },
+            { id: 'nhk', name: 'NHK World Japan', yt: 'f0lYkdA-Gtw', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/NHK_World.svg/240px-NHK_World.svg.png' },
+            { id: 'africanews', name: 'Africa News', yt: 'NQjabLGdP5g', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Africanews_logo.svg/240px-Africanews_logo.svg.png' },
+            { id: 'arisenews', name: 'Arise News', yt: 'E8PRZmDUiPw', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Arise_News_logo.svg/240px-Arise_News_logo.svg.png' },
+            { id: 'alarabiya', name: 'Al Arabiya English', yt: 'rXnG4eiVVdM', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Al_Arabiya.svg/240px-Al_Arabiya.svg.png' }
+        ];
+
+        function loadChannel(id) {
+            const chan = NEWS_CHANNELS.find(c => c.id === id) || NEWS_CHANNELS[0];
+            const player = document.getElementById('main-player');
+            player.src = `https://www.youtube.com/embed/${chan.yt}?autoplay=1&mute=0&rel=0&modestbranding=1&controls=1&enablejsapi=1`;
+            document.getElementById('cur-name').textContent = chan.name;
+            document.querySelectorAll('.channel-card').forEach(el => {
+                el.classList.toggle('active', el.dataset.id === id);
+            });
+        }
+
+        function updateClock() {
+            const now = new Date();
+            const h = now.getUTCHours().toString().padStart(2, '0');
+            const m = now.getUTCMinutes().toString().padStart(2, '0');
+            const s = now.getUTCSeconds().toString().padStart(2, '0');
+            document.getElementById('clock').textContent = `${h}:${m}:${s} UTC`;
+        }
+
+        function init() {
+            const list = document.getElementById('channel-list');
+            NEWS_CHANNELS.forEach(c => {
+                const card = document.createElement('div');
+                card.className = 'channel-card';
+                card.dataset.id = c.id;
+                card.onclick = () => loadChannel(c.id);
+                card.innerHTML = `
+                    <div class="channel-thumbnail">
+                        <img src="https://img.youtube.com/vi/${c.yt}/mqdefault.jpg" alt="${c.name}">
+                    </div>
+                    <div class="channel-name-overlay">
+                        <div class="channel-name-text">${c.name}</div>
+                    </div>
+                `;
+                list.appendChild(card);
+            });
+            loadChannel(NEWS_CHANNELS[0].id);
+            updateClock();
+            setInterval(updateClock, 1000);
+        }
+
+        init();
+    </script>
+</body>
+</html>

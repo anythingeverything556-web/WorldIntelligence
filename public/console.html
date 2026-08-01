@@ -1,0 +1,3047 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<!-- Preconnect for faster CDN loads -->
+<link rel="preconnect" href="https://unpkg.com" crossorigin />
+<link rel="preconnect" href="https://cdn.pannellum.org" crossorigin />
+<link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin />
+<title>WorldIntelligence — Open-Source Intelligence, Mapped</title>
+<meta name="description" content="23 verified open-source datasets in one free, queryable map. Military, nuclear, conflicts, infrastructure, and more." />
+<meta name="keywords" content="OSINT, intelligence, military bases, conflict zones, nuclear facilities, infrastructure monitoring, real-time map, 3D globe, breaking news, geopolitical analysis" />
+<meta name="author" content="WorldIntelligence" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://worldintelligence.vercel.app/" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://worldintelligence.vercel.app/" />
+<meta property="og:site_name" content="WorldIntelligence" />
+<meta property="og:title" content="WorldIntelligence — Open-Source Intelligence, Mapped" />
+<meta property="og:description" content="Real-time global intelligence: military bases, conflict zones, nuclear facilities, critical infrastructure, and breaking news." />
+<meta property="og:image" content="https://worldintelligence.vercel.app/assets/img/logo-light.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="en_US" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content="https://worldintelligence.vercel.app/" />
+<meta name="twitter:title" content="WorldIntelligence — Open-Source Intelligence, Mapped" />
+<meta name="twitter:description" content="Real-time global intelligence: military bases, conflict zones, nuclear facilities, and breaking news." />
+<meta name="twitter:image" content="https://worldintelligence.vercel.app/assets/img/logo-light.png" />
+
+<!-- App Icons -->
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-light.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/logo-light.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/logo-light.png" />
+<meta name="msapplication-TileColor" content="#050505" />
+<link rel="manifest" href="/manifest.json" />
+<meta name="theme-color" content="#ffffff" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+<!-- PERFORMANCE OPTIMIZATIONS -->
+<!-- Preconnect to critical domains -->
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://unpkg.com" crossorigin />
+<link rel="preconnect" href="https://mt0.google.com" crossorigin />
+<link rel="preconnect" href="https://mt1.google.com" crossorigin />
+<link rel="preconnect" href="https://graph.mapillary.com" crossorigin />
+<link rel="preconnect" href="https://cdn.pannellum.org" crossorigin />
+<link rel="preconnect" href="https://cesium.com" crossorigin />
+
+<link rel="preconnect" href="https://api.mapbox.com" crossorigin />
+
+<!-- DNS Prefetch -->
+<link rel="dns-prefetch" href="https://worldintelligence.vercel.app" />
+<link rel="dns-prefetch" href="https://api.openstreetmap.org" />
+<link rel="dns-prefetch" href="https://graph.mapillary.com" />
+<link rel="dns-prefetch" href="https://images.mapillary.com" />
+
+<!-- Resource hints -->
+<link rel="preload" href="/assets/js/data.min.js" as="script" />
+
+<!-- Mobile performance -->
+<meta name="format-detection" content="telephone=no" />
+<meta name="x-dns-prefetch-control" content="on" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Unbounded:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+            integrity="sha384-sHL9NAb7lN7rfvG5lfHpm643Xkcjzp4jFvuavGOndn6pjVqS6ny56CAt3nsEVT4H"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"
+            integrity="sha384-pmjIAcz2bAn0xukfxADbZIb3t8oRT9Sv0rvO+BR5Csr6Dhqq+nZs59P0pPKQJkEV"
+            crossorigin="anonymous"
+        />
+        <!-- Pannellum — lightweight 360° panorama viewer for Mapillary -->
+        <link rel="stylesheet" href="https://cdn.pannellum.org/2.5/pannellum.css" />
+        <script defer src="https://cdn.pannellum.org/2.5/pannellum.js"></script>
+        <script
+            defer
+            src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            defer
+            src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"
+            integrity="sha384-eXVCORTRlv4FUUgS/xmOyr66XBVraen8ATNLMESp92FKXLAMiKkerixTiBvXriZr"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            defer
+            src="https://unpkg.com/leaflet-image@0.4.0/leaflet-image.js"
+            integrity="sha384-Cl2KSaehTGkoEiw07k3L/nCCwvF6tB3BcWgb83eHZUp2oPDI3qSKJUypvhoB66Gq"
+            crossorigin="anonymous"
+        ></script>
+        <!-- Google Identity Services SDK — defer only (not async) so it loads after DOM parse.
+             google-auth.js polls for window.google.accounts.id to be available. -->
+        <script src="https://accounts.google.com/gsi/client" defer></script>
+
+<!-- Structured Data - Organization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "WorldIntelligence",
+  "description": "Real-time global intelligence platform for military, conflicts, infrastructure monitoring",
+  "url": "https://worldintelligence.vercel.app",
+  "logo": "https://worldintelligence.vercel.app/assets/img/logo.png",
+  "sameAs": [
+    "https://x.com/WorldIntelOSINT"
+  ]
+}
+</script>
+
+<!-- Structured Data - WebSite -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "WorldIntelligence",
+  "url": "https://worldintelligence.vercel.app",
+  "description": "Real-time global intelligence: military bases, conflict zones, nuclear facilities, and breaking news",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://worldintelligence.vercel.app/?search={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+<!-- Structured Data - WebApplication -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "WorldIntelligence",
+  "applicationCategory": "Maps, Intelligence, News",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Interactive world map",
+    "3D globe visualization",
+    "Real-time news ticker",
+    "Military base tracking",
+    "Conflict zone monitoring",
+    "Earthquake tracking",
+    "Offline support",
+    "PWA capabilities"
+  ]
+}
+</script>
+
+  <link rel="stylesheet" href="/assets/css/cesium/theme.min.css" />
+<link rel="stylesheet" href="/assets/css/imagery-panel-new.min.css" />
+<link rel="stylesheet" href="/assets/css/layers-dropdown.min.css" />
+<link rel="stylesheet" href="/assets/css/features.min.css" />
+<link rel="stylesheet" href="/assets/css/app.min.css" />
+<link rel="stylesheet" href="/assets/css/ui-overhaul.min.css" />
+        <style>
+            /* ═══ FEATURE PACK: Additional inline styles ═══ */
+            /* Large icon mode */
+            body.wi-icons-large .leaflet-marker-icon { transform: scale(1.4); }
+            /* Disable marker animations */
+            body.wi-no-animations .leaflet-marker-icon { animation: none !important; transition: none !important; }
+            body.wi-no-animations .leaflet-interactive { animation: none !important; }
+            /* Collapsed sidebar groups */
+            .glbl.collapsed::after { content: ' ▸'; font-size: 9px; color: rgba(255,255,255,.3); }
+            .glbl:not(.collapsed)::after { content: ' ▾'; font-size: 9px; color: rgba(255,255,255,.3); }
+
+            /* ═══ X FOLLOW BUTTON ═══ */
+      #x-follow-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 0 13px;
+        height: 28px;
+        width: 88px;
+        background: #000;
+        border: 1px solid #2a2a2a;
+        border-radius: 8px;
+        cursor: pointer;
+        text-decoration: none;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 600;
+        font-family: Inter, sans-serif;
+        white-space: nowrap;
+        transition: background 0.15s, border-color 0.15s;
+        flex-shrink: 0;
+        position: relative;
+        z-index: 100;
+      }
+      #x-follow-btn:hover {
+        background: #111;
+        border-color: #444;
+      }
+      #x-follow-btn .x-logo {
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 1;
+      }
+
+/* ═══ 3D LAYERS BUTTON — replaced by unified #wi-layers-btn in toolbar ═══ */
+#layers-3d-btn { display: none !important; }
+
+/* ═══ SHARE TOAST ═══ */
+            #share-toast {
+                position: fixed;
+                bottom: 90px;
+                left: 50%;
+                transform: translateX(-50%) translateY(20px);
+                background: rgba(34, 197, 94, 0.15);
+                border: 1px solid rgba(34, 197, 94, 0.35);
+                color: #22c55e;
+                font-size: 13px;
+                font-weight: 600;
+                font-family: Inter, sans-serif;
+                padding: 10px 20px;
+                border-radius: 10px;
+                z-index: 9999;
+                transition:
+                    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                    opacity 0.3s;
+                opacity: 0;
+                pointer-events: none;
+                white-space: nowrap;
+            }
+            #share-toast.show {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+
+            /* ═══════════════════════════════════════
+               MAP CONTAINER - FULL SCREEN
+            ═══════════════════════════════════════ */
+            #map {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+                z-index: 0;
+            }
+
+            /* ═══════════════════════════════════════
+               SIDEBAR + LEGEND + SEARCH: hide when drawer open
+            ═══════════════════════════════════════ */
+            #SIDE {
+                transition:
+                    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    opacity 0.25s;
+            }
+            body.drawer-open #SIDE {
+                transform: translateX(-110%);
+                opacity: 0;
+                pointer-events: none;
+            }
+            #leg {
+                transition:
+                    opacity 0.22s,
+                    transform 0.22s;
+            }
+            body.drawer-open #leg {
+                opacity: 0;
+                transform: translateY(10px);
+                pointer-events: none;
+            }
+            /* Search bar */
+            #gsearch-group {
+                transition:
+                    opacity 0.22s,
+                    transform 0.22s;
+            }
+            body.drawer-open #gsearch-group {
+                opacity: 0;
+                transform: translateY(-8px);
+                pointer-events: none;
+            }
+            /* Mobile search toggle */
+            body.drawer-open #gsearch-tog-mob {
+                opacity: 0;
+                pointer-events: none;
+            }
+            /* Hide detail card and draw-info when drawer is open */
+            body.drawer-open #det {
+                opacity: 0;
+                transform: translateY(10px);
+                pointer-events: none;
+            }
+            body.drawer-open .wi-draw-info {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            /* ═══════════════════════════════════════
+               BOTTOM PULL-UP DRAWER
+            ═══════════════════════════════════════ */
+
+            /* ── WIDE PULL-UP DRAWER HANDLE ── */
+            #drawer-handle {
+                position: fixed;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 810;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 280px;
+                max-width: calc(100vw - 32px);
+                background: rgba(8, 11, 22, 0.97);
+                border-radius: 12px 12px 0 0;
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                border-bottom: none;
+                cursor: pointer;
+                user-select: none;
+                padding: 8px 16px 10px;
+                gap: 6px;
+                transition: background 0.18s, border-color 0.2s;
+                box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255,255,255,0.06);
+            }
+            #drawer-handle:hover {
+                background: rgba(12, 16, 30, 0.99);
+                border-color: rgba(255, 255, 255, 0.3);
+            }
+            body.drawer-open #drawer-handle {
+                background: rgba(6, 8, 15, 0.99);
+                border-color: rgba(255, 255, 255, 0.25);
+            }
+            .dh-bar-wrap {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 6px;
+                width: 100%;
+            }
+            .dh-pill {
+                width: 36px;
+                height: 3px;
+                border-radius: 2px;
+                background: rgba(255, 255, 255, 0.15);
+                transition: background 0.15s;
+            }
+            #drawer-handle:hover .dh-pill { background: rgba(255,255,255,0.4); }
+            body.drawer-open #drawer-handle .dh-pill { background: rgba(255,255,255,0.35); }
+            .dh-label {
+                display: flex;
+                align-items: center;
+                gap: 7px;
+                font-family: 'Inter', sans-serif;
+                font-size: 11px;
+                font-weight: 700;
+                letter-spacing: 0.08em;
+                color: rgba(255,255,255,0.5);
+                transition: color 0.15s;
+            }
+            #drawer-handle:hover .dh-label { color: rgba(255,255,255,0.75); }
+            body.drawer-open #drawer-handle .dh-label { color: #ffffff; }
+            .dh-live-dot {
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: #22c55e;
+                box-shadow: 0 0 6px #22c55e;
+                animation: dhPulse 2s infinite;
+                flex-shrink: 0;
+            }
+            body.drawer-open .dh-live-dot { display: none; }
+            .dh-chevron {
+                width: 10px;
+                height: 7px;
+                stroke: currentColor;
+                transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+                flex-shrink: 0;
+            }
+            body.drawer-open .dh-chevron { transform: rotate(180deg); }
+            /* Pulse dot (legacy — hidden now) */
+            #drawer-handle .dh-dot { display: none; }
+            @keyframes dhPulse {
+                0%,
+                100% {
+                    opacity: 1;
+                }
+                50% {
+                    opacity: 0.25;
+                }
+            }
+
+            /* The drawer panel itself */
+            #bottom-drawer {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 809;
+                height: 420px;
+                min-height: 200px;
+                max-height: 88vh;
+                background: rgba(6, 8, 15, 0.96);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border-top: 1px solid rgba(255,255,255,0.15);
+                border-radius: 16px 16px 0 0;
+                box-shadow: 0 -12px 48px rgba(0,0,0,0.7), 0 -1px 0 rgba(255,255,255,0.08);
+                transform: translateY(100%);
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+            }
+            body.drawer-open #bottom-drawer {
+                transform: translateY(0);
+            }
+            /* While dragging, disable transition so it tracks finger */
+            #bottom-drawer.is-dragging {
+                transition: none !important;
+            }
+            /* Fullscreen state */
+
+            /* ── DRAWER TOP STRIP ── */
+            #drawer-topstrip {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 0 16px;
+                height: 52px;
+                flex-shrink: 0;
+                background: rgba(6, 8, 15, 0.8);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border-top: 1px solid rgba(255,255,255,0.12);
+                cursor: ns-resize;
+                user-select: none;
+            }
+            #drawer-grab {
+                width: 32px;
+                height: 3px;
+                background: rgba(255,255,255,0.08);
+                border-radius: 2px;
+                cursor: ns-resize;
+                flex-shrink: 0;
+                transition: background 0.15s;
+            }
+            #drawer-topstrip:hover #drawer-grab,
+            #drawer-topstrip.dragging #drawer-grab {
+                background: rgba(255,255,255,0.45);
+            }
+
+            /* ── EXPAND BUTTON ── */
+            #drawer-expand-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 26px;
+                height: 26px;
+                background: rgba(255,255,255,0.04);
+                border: 1px solid rgba(255,255,255,0.07);
+                border-radius: 7px;
+                color: #3a4a5e;
+                cursor: pointer;
+                transition: all 0.15s;
+                flex-shrink: 0;
+            }
+            #drawer-expand-btn:hover {
+                color: #ffffff !important;
+                background: rgba(255,255,255,0.08) !important;
+                border-color: rgba(255,255,255,0.25) !important;
+            }
+            #drawer-expand-btn svg {
+                width: 12px;
+                height: 12px;
+                stroke: currentColor;
+                fill: none;
+                stroke-width: 1.8;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+            }
+
+            /* ── TABS ── */
+            #drawer-tabs {
+                display: flex;
+                gap: 2px;
+                flex: 1;
+                overflow-x: auto;
+                scrollbar-width: none;
+            }
+            #drawer-tabs::-webkit-scrollbar { display: none; }
+            .drawer-tab {
+                display: flex;
+                align-items: center;
+                gap: 7px;
+                padding: 6px 15px;
+                border-radius: 8px;
+                border: 1px solid transparent;
+                background: transparent;
+                color: #3a4a5e;
+                font-size: 12px;
+                font-weight: 600;
+                font-family: 'Inter', sans-serif;
+                letter-spacing: 0.1px;
+                cursor: pointer;
+                transition: all 0.15s;
+                white-space: nowrap;
+            }
+            .drawer-tab:hover {
+                color: #64748b;
+                background: rgba(255,255,255,0.04);
+            }
+            .drawer-tab.active {
+                background: rgba(255,255,255,0.12);
+                color: #ffffff;
+                border-color: rgba(255,255,255,0.28);
+                box-shadow: 0 2px 12px rgba(255,255,255,0.1);
+            }
+            .drawer-tab .dt-dot {
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                animation: dhPulse 2s infinite;
+                flex-shrink: 0;
+            }
+
+            /* ── RIGHT CONTROLS ── */
+            #drawer-controls {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                flex-shrink: 0;
+            }
+            #drawer-filter-row {
+                display: flex;
+                gap: 3px;
+            }
+            .drawer-filter-btn {
+                padding: 4px 11px;
+                border-radius: 6px;
+                border: 1px solid rgba(255,255,255,0.07);
+                background: transparent;
+                color: #3a4a5e;
+                font-size: 10px;
+                font-weight: 700;
+                letter-spacing: 0.3px;
+                cursor: pointer;
+                font-family: 'Inter', sans-serif;
+                transition: all 0.15s;
+            }
+            .drawer-filter-btn.active {
+                background: rgba(255,255,255,0.15);
+                color: #ffffff;
+                border-color: rgba(255,255,255,0.35);
+            }
+            .drawer-filter-btn:hover:not(.active) {
+                color: #64748b;
+                border-color: rgba(255,255,255,0.12);
+            }
+            #drawer-refresh-btn {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                background: transparent;
+                border: 1px solid rgba(255,255,255,0.07);
+                border-radius: 6px;
+                padding: 4px 10px;
+                color: #3a4a5e;
+                font-size: 10px;
+                font-weight: 600;
+                font-family: 'Inter', sans-serif;
+                cursor: pointer;
+                transition: all 0.15s;
+            }
+            #drawer-refresh-btn:hover {
+                color: #64748b;
+                border-color: rgba(255,255,255,0.12);
+            }
+            #drawer-refresh-btn svg {
+                width: 10px;
+                height: 10px;
+                stroke: currentColor;
+                fill: none;
+                stroke-width: 2;
+                stroke-linecap: round;
+            }
+            #drawer-refresh-btn.spinning svg {
+                animation: spin 0.7s linear infinite;
+            }
+            @keyframes spin { to { transform: rotate(360deg); } }
+            #drawer-close-btn {
+                background: rgba(255,255,255,0.04);
+                border: 1px solid rgba(255,255,255,0.07);
+                border-radius: 7px;
+                width: 28px;
+                height: 28px;
+                color: #3a4a5e;
+                font-size: 12px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.15s;
+                flex-shrink: 0;
+            }
+            #drawer-close-btn:hover {
+                color: #ef4444;
+                background: rgba(239,68,68,0.1);
+                border-color: rgba(239,68,68,0.25);
+            }
+
+            /* ── DRAWER BODY ── */
+            #drawer-body {
+                flex: 1;
+                overflow: hidden;
+                position: relative;
+            }
+            .drawer-pane {
+                position: absolute;
+                inset: 0;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.18s;
+            }
+            .drawer-pane.active {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            /* ── NEWS PANE ── */
+            #drawer-pane-news {
+                display: flex;
+                flex-direction: row;
+                overflow: hidden;
+                background: #000;
+            }
+            #news-player-wrap {
+                flex: 1;
+                background: #000;
+                position: relative;
+                border-right: 1px solid rgba(255,255,255,0.08);
+            }
+            #news-player {
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+
+            /* ── CHANNEL SIDEBAR ── */
+            #news-channels {
+                width: 320px;
+                flex-shrink: 0;
+                background: linear-gradient(180deg, rgba(12,15,30,0.95) 0%, rgba(8,11,20,0.98) 100%);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border-left: 1px solid rgba(255,255,255,0.1);
+                display: flex;
+                flex-direction: column;
+                overflow-y: auto;
+                overflow-x: hidden;
+                scrollbar-width: thin;
+                scrollbar-color: rgba(255,255,255,0.15) transparent;
+            }
+            #news-channels::-webkit-scrollbar { width: 3px; }
+            #news-channels::-webkit-scrollbar-thumb {
+                background: rgba(255,255,255,0.2);
+                border-radius: 2px;
+            }
+
+            /* Channels header */
+            #news-channels::before {
+                content: 'AVAILABLE FEEDS';
+                display: block;
+                font-family: 'Inter', sans-serif;
+                font-size: 8px;
+                font-weight: 700;
+                letter-spacing: 2.5px;
+                color: rgba(255,255,255,0.5);
+                padding: 12px 14px 10px;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                background: linear-gradient(90deg, rgba(255,255,255,0.06) 0%, transparent 100%);
+                flex-shrink: 0;
+            }
+
+            /* ── CHANNEL CARDS ── */
+            .chan-card {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 0;
+                background: transparent;
+                border-bottom: 1px solid rgba(255,255,255,0.03);
+                cursor: pointer;
+                transition: all 0.15s;
+                flex-shrink: 0;
+                overflow: hidden;
+                padding: 4px 0;
+            }
+            .chan-card:hover {
+                background: rgba(255,255,255,0.04);
+            }
+            .chan-card.active {
+                background: rgba(255,255,255,0.08);
+                border-bottom-color: rgba(255,255,255,0.15);
+                box-shadow: inset 3px 0 0 #ffffff;
+            }
+            .chan-thumbnail {
+                width: 100px;
+                height: 56px;
+                flex-shrink: 0;
+                position: relative;
+                overflow: hidden;
+                background: #0e111c;
+                border-radius: 6px;
+                margin-left: 8px;
+            }
+            .chan-thumbnail img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+                opacity: 0.85;
+                transition: opacity 0.2s;
+            }
+            .chan-card:hover .chan-thumbnail img,
+            .chan-card.active .chan-thumbnail img {
+                opacity: 1;
+            }
+            .chan-name-overlay {
+                flex: 1;
+                padding: 0 12px;
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+                min-width: 0;
+            }
+            .chan-name {
+                font-size: 13px;
+                font-weight: 600;
+                font-family: 'Inter', sans-serif;
+                color: #cbd5e1;
+                letter-spacing: -0.1px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                transition: color 0.15s;
+            }
+            .chan-card:hover .chan-name { color: #ffffff; }
+            .chan-card.active .chan-name {
+                color: #ffffff;
+                font-weight: 700;
+            }
+            .chan-live-badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 4px;
+                font-family: 'Inter', sans-serif;
+                font-size: 8px;
+                font-weight: 700;
+                letter-spacing: 1px;
+                color: #22c55e;
+                opacity: 0;
+                transition: opacity 0.15s;
+            }
+            .chan-card.active .chan-live-badge { opacity: 1; }
+            .chan-live-badge::before {
+                content: '';
+                width: 4px;
+                height: 4px;
+                border-radius: 50%;
+                background: #22c55e;
+                box-shadow: 0 0 5px #22c55e;
+                animation: dhPulse 2s infinite;
+            }
+
+            /* ── Intel Feed Pane ── */
+            #drawer-pane-intel {
+                overflow: hidden;
+            }
+            .intel-item {
+                padding: 12px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                transition: background 0.15s;
+            }
+            .intel-item:hover {
+                background: rgba(255, 255, 255, 0.02);
+            }
+            .intel-title {
+                font-size: 14px;
+                font-weight: 600;
+                color: #ffffff;
+                margin-bottom: 4px;
+            }
+            .intel-meta {
+                font-size: 11px;
+                color: #4a5568;
+            }
+
+            /* ── Conflict Zones, Market, Crypto Panes ── */
+            #drawer-pane-conflict,
+            #drawer-pane-market,
+            #drawer-pane-crypto {
+                overflow: hidden;
+            }
+            #drawer-pane-conflict::-webkit-scrollbar,
+            #drawer-pane-market::-webkit-scrollbar,
+            #drawer-pane-crypto::-webkit-scrollbar {
+                width: 3px;
+            }
+            #drawer-pane-conflict::-webkit-scrollbar-thumb,
+            #drawer-pane-market::-webkit-scrollbar-thumb,
+            #drawer-pane-crypto::-webkit-scrollbar-thumb {
+                background: rgba(255,255,255,0.15);
+                border-radius: 2px;
+            }
+            .data-card {
+                padding: 16px;
+                background: rgba(255,255,255,0.03);
+                border: 1px solid rgba(255,255,255,0.06);
+                border-radius: 10px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                transition: all 0.2s ease;
+            }
+            .data-card:hover {
+                background: rgba(255,255,255,0.05);
+                border-color: rgba(255,255,255,0.11);
+                transform: translateY(-1px);
+            }
+            .data-card-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .data-card-name {
+                font-size: 15px;
+                font-weight: 700;
+                color: #fff;
+            }
+            .data-card-badge {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                padding: 3px 8px;
+                border-radius: 12px;
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 9px;
+                font-weight: 700;
+            }
+            .data-card-value {
+                font-size: 28px;
+                font-weight: 800;
+                line-height: 1;
+            }
+            .data-card-info {
+                display: flex;
+                gap: 12px;
+                font-size: 11px;
+            }
+            .data-card-label {
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 9px;
+                font-weight: 600;
+                color: var(--mt);
+            }
+            .data-card-row {
+                display: flex;
+                gap: 8px;
+                margin-bottom: 6px;
+            }
+
+            /* ── Generic Pane ── */
+            .drawer-pane-generic {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #4a5568;
+                font-family: Inter, sans-serif;
+                font-size: 14px;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+/* ── Settings Modal ── */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 12000;
+                display: none;
+                align-items: center;
+                justify-content: center;
+            }
+            .modal-backdrop.show {
+                display: flex;
+            }
+            .modal-content {
+                width: 90%;
+                max-width: 650px;
+                max-height: 80vh;
+                background: rgba(6, 8, 16, 0.99);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 14px;
+                box-shadow: 0 24px 64px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255,255,255,0.06);
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+                animation: modalIn 0.25s cubic-bezier(0.34, 1.4, 0.64, 1);
+            }
+            @keyframes modalIn {
+                from { transform: scale(0.95); opacity: 0; }
+                to { transform: scale(1); opacity: 1; }
+            }
+            .modal-header {
+                padding: 20px 24px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .modal-header h2 {
+                margin: 0;
+                font-size: 18px;
+                color: #fff;
+                font-weight: 700;
+            }
+            .modal-close:hover { color: #fff; }
+
+            .modal-pane { display: none; }
+            .modal-pane.active { display: block; }
+            
+            .settings-section { margin-bottom: 20px; }
+            .settings-h { 
+                font-size: 11px; font-weight: 700; color: #4a5568; 
+                text-transform: uppercase; letter-spacing: 0.1em;
+                margin-bottom: 12px; padding-bottom: 6px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            }
+            .settings-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                gap: 8px;
+            }
+            .setting-item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 8px 12px;
+                border-radius: 8px;
+                background: rgba(255, 255, 255, 0.02);
+                border: 1px solid rgba(255, 255, 255, 0.04);
+                cursor: pointer;
+                transition: all 0.15s;
+            }
+            .setting-item:hover { background: rgba(255, 255, 255, 0.05); }
+            .setting-item.active {
+                border-color: rgba(249, 115, 22, 0.3);
+                background: rgba(249, 115, 22, 0.08);
+            }
+            .setting-check {
+                width: 16px; height: 16px; border-radius: 4px;
+                border: 1px solid #4a5568; display: flex;
+                align-items: center; justify-content: center;
+                font-size: 10px; color: transparent;
+            }
+            .setting-item.active .setting-check {
+                background: #ffffff; border-color: #ffffff; color: #fff;
+            }
+            .setting-label { font-size: 12px; font-weight: 500; color: #94a3b8; }
+            .setting-item.active .setting-label { color: #e2e8f0; }
+
+            #drawer-tabs-scroll {
+                display: flex;
+                gap: 4px;
+                flex: 1;
+                overflow-x: auto;
+                scrollbar-width: none;
+            }
+#drawer-tabs-scroll::-webkit-scrollbar { display: none; }
+            }
+
+            .modal-tabs {
+                display: flex;
+                padding: 10px 24px;
+                gap: 8px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+            .modal-tab {
+                padding: 8px 16px;
+                border-radius: 8px;
+                border: 1px solid transparent;
+                background: transparent;
+                color: #4a5568;
+                font-size: 13px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.15s;
+            }
+            .modal-tab:hover { color: #94a3b8; background: rgba(255, 255, 255, 0.03); }
+            .modal-tab.active {
+                background: rgba(249, 115, 22, 0.1);
+                color: #ffffff;
+                border-color: rgba(249, 115, 22, 0.2);
+            }
+
+            .modal-body {
+                flex: 1;
+                overflow-y: auto;
+                padding: 24px;
+            }
+            .settings-pane { display: none; }
+            .settings-pane.active { display: block; }
+
+            .settings-group { margin-bottom: 24px; }
+            .settings-group label {
+                display: block;
+                font-size: 12px;
+                color: #4a5568;
+                margin-bottom: 8px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+            }
+            .settings-group select {
+                width: 100%;
+                background: rgba(255, 255, 255, 0.03);
+                border: 1px solid rgba(255, 255, 255, 0.07);
+                border-radius: 10px;
+                padding: 10px 14px;
+                color: #fff;
+                font-size: 14px;
+                outline: none;
+                transition: border-color 0.15s;
+            }
+            .settings-group select:focus { border-color: rgba(249, 115, 22, 0.4); }
+
+            .toggle-group {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 16px;
+            }
+            .toggle-group label { margin-bottom: 0; text-transform: none; font-size: 14px; color: #94a3b8; }
+
+            .settings-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                gap: 12px;
+            }
+            .settings-item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 10px 14px;
+                background: rgba(255, 255, 255, 0.02);
+                border: 1px solid rgba(255, 255, 255, 0.05);
+                border-radius: 10px;
+                cursor: pointer;
+                transition: all 0.15s;
+            }
+            .settings-item:hover { background: rgba(255, 255, 255, 0.04); }
+            .settings-item.active {
+                background: rgba(249, 115, 22, 0.08);
+                border-color: rgba(249, 115, 22, 0.2);
+            }
+            .settings-item-name { font-size: 12px; color: #94a3b8; font-weight: 500; }
+            .settings-item.active .settings-item-name { color: #ffffff; }
+            
+            .settings-active-count {
+                font-size: 12px;
+                color: #4a5568;
+                margin-bottom: 16px;
+                text-align: right;
+            }
+
+            .settings-cat-title {
+                grid-column: 1 / -1;
+                font-size: 11px;
+                color: #ffffff;
+                font-weight: 700;
+                text-transform: uppercase;
+                margin-top: 20px;
+                margin-bottom: 4px;
+                letter-spacing: 0.1em;
+            }
+            .settings-cat-title:first-child { margin-top: 0; }
+
+            /* Switch checkbox styling */
+            .switch {
+                position: relative;
+                display: inline-block;
+                width: 36px;
+                height: 20px;
+            }
+            .switch input { opacity: 0; width: 0; height: 0; }
+            .slider {
+                position: absolute;
+                cursor: pointer;
+                inset: 0;
+                background-color: rgba(255, 255, 255, 0.1);
+                transition: .3s;
+                border-radius: 20px;
+            }
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 14px;
+                width: 14px;
+                left: 3px;
+                bottom: 3px;
+                background-color: #4a5568;
+                transition: .3s;
+                border-radius: 50%;
+            }
+            input:checked + .slider { background-color: rgba(249, 115, 22, 0.4); }
+input:checked + .slider:before { transform: translateX(16px); background-color: #ffffff; }
+
+/* ── Skip Links for Accessibility ── */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  color: #000;
+  padding: 8px 16px;
+  border-radius: 0 0 8px 8px;
+  font-weight: 600;
+  font-size: 14px;
+  z-index: 10000;
+  transition: top 0.2s;
+  text-decoration: none;
+}
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* ── Focus Visible Styles ── */
+*:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+/* ── Reduced Motion Support ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── High Contrast Mode Support ── */
+@media (prefers-contrast: more) {
+  :root {
+    --or: #ffd700;
+    --tx: #ffffff;
+  }
+  
+  button,
+  a {
+    border: 2px solid currentColor;
+  }
+}
+
+/* ── Keyboard Shortcuts Modal v2 ── */
+.shortcuts-container {
+  padding: 0;
+  max-height: 70vh;
+  overflow-y: auto;
+  background: var(--ink2);
+}
+
+.shortcuts-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 22px;
+  background: var(--ink2);
+  border-bottom: 1px solid var(--border);
+}
+
+.shortcuts-header h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--tx);
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+.shortcuts-close-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--dim);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  color: var(--mt);
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.shortcuts-close-btn:hover {
+  background: var(--border2);
+  color: var(--tx);
+  border-color: var(--or);
+}
+
+.shortcuts-close-btn:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 2px;
+}
+
+.shortcuts-content {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.shortcuts-category {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.shortcuts-category-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.shortcuts-category-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.shortcuts-category-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--or);
+  margin: 0;
+}
+
+.shortcuts-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.shortcuts-item:last-child {
+  border-bottom: none;
+}
+
+.shortcuts-key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 10px;
+  background: var(--dim);
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--or);
+  text-transform: uppercase;
+}
+
+.shortcuts-label {
+  font-size: 14px;
+  color: var(--tx);
+  font-weight: 400;
+}
+
+.shortcuts-separator {
+  height: 1px;
+  background: var(--border);
+  margin: 4px 0;
+}
+
+/* ── Mobile ── */
+@media (max-width: 640px) {
+                #bottom-drawer {
+                    height: 70vh;
+                    border-radius: 20px 20px 0 0;
+                }
+                #news-grid {
+                    flex-direction: column;
+                    overflow-x: hidden;
+                    overflow-y: auto;
+                }
+                .news-card {
+                    flex: none;
+                    width: 100%;
+                }
+  #x-follow-btn {
+    display: none;
+  }
+  #layers-3d-container {
+    display: none;
+  }
+            }
+        </style>
+<style>
+/* ══ STREET VIEW PANEL ══ */
+#sv-panel{position:fixed;z-index:1050;min-width:400px;min-height:320px;background:linear-gradient(145deg,rgba(10,14,22,.97),rgba(6,8,14,.99));border:1px solid rgba(255,255,255,.28);border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,.85),0 0 0 1px rgba(255,255,255,.07);display:flex;flex-direction:column;overflow:hidden;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(12px) scale(0.97);transition:opacity .25s cubic-bezier(.4,0,.2,1),transform .25s cubic-bezier(.34,1.2,.64,1),visibility 0s .25s;isolation:isolate;}
+#sv-panel.show{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0) scale(1);transition:opacity .25s cubic-bezier(.4,0,.2,1),transform .25s cubic-bezier(.34,1.2,.64,1),visibility 0s 0s;}
+#sv-panel.sv-dragging,#sv-panel.sv-resizing{transition:none!important;}
+#sv-panel.sv-dragging{cursor:grabbing;}
+#sv-panel.sv-expanded{border-radius:8px;z-index:1200;}
+#sv-panel.sv-expanded #sv-resize-handle{display:none;}
+#sv-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px 9px;border-bottom:1px solid rgba(255,255,255,.12);flex-shrink:0;cursor:grab;transition:border-color .2s;}
+#sv-panel.sv-dragging #sv-header{cursor:grabbing;}
+#sv-drag-handle{display:flex;align-items:center;gap:7px;flex:1;}
+#sv-drag-handle span{font-size:12px;font-weight:700;color:rgba(255,255,255,.9);letter-spacing:.3px;transition:color .2s;}
+#sv-drag-handle svg{transition:color .2s;}
+.sv-grip{width:16px;height:8px;background:radial-gradient(circle,rgba(255,255,255,.25) 1.5px,transparent 1.5px);background-size:4px 4px;flex-shrink:0;transition:background .2s;}
+#sv-controls{display:flex;align-items:center;gap:4px;}
+#sv-controls button{background:none;border:none;color:rgba(255,255,255,.5);cursor:pointer;width:26px;height:26px;border-radius:6px;display:grid;place-items:center;transition:background .14s,color .14s;padding:0;}
+#sv-controls button:hover{background:rgba(255,255,255,.08);color:#fff;}
+#sv-close-btn{font-size:16px!important;font-weight:300;}
+#sv-info-bar{display:flex;align-items:center;padding:5px 14px;font-size:10px;color:rgba(255,255,255,.4);background:rgba(0,0,0,.2);flex-shrink:0;gap:8px;transition:color .2s,background .2s;}
+#sv-frame-wrap{flex:1;position:relative;overflow:hidden;isolation:isolate;mix-blend-mode:normal!important;}
+#sv-loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:rgba(6,8,14,.85);z-index:2;transition:background .2s;}
+.sv-spinner{width:32px;height:32px;border:3px solid rgba(255,255,255,.15);border-top-color:#ffffff;border-radius:50%;animation:sv-spin .8s linear infinite;}
+@keyframes sv-spin{to{transform:rotate(360deg);}}
+.sv-load-text{font-size:11px;color:rgba(255,255,255,.4);transition:color .2s;}
+#sv-no-coverage{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;z-index:2;}
+.sv-no-title{font-weight:700;margin-bottom:4px;color:rgba(255,255,255,.7);transition:color .2s;}
+.sv-no-sub{font-size:11px;color:rgba(255,255,255,.35);transition:color .2s;}
+#sv-retry-btn{margin-top:14px;padding:6px 16px;border-radius:7px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);color:#ffffff;font-size:11px;font-weight:700;cursor:pointer;transition:all .15s;}
+#sv-retry-btn:hover{background:rgba(255,255,255,.18);}
+#sv-resize-handle{position:absolute;bottom:0;right:0;width:18px;height:18px;cursor:se-resize;z-index:10;background:linear-gradient(135deg,transparent 50%,rgba(255,255,255,.3) 50%);transition:background .2s;}
+/* ══ CLOSEST LOCATION HINT BAR ══ */
+#sv-closest-hint{display:flex;align-items:center;justify-content:center;gap:6px;padding:6px 14px;font-size:10px;color:rgba(255,255,255,.65);background:rgba(255,255,255,.06);border-top:1px solid rgba(255,255,255,.1);flex-shrink:0;letter-spacing:.01em;font-weight:500;transition:color .2s,background .2s,border-color .2s;}
+#sv-closest-hint svg{width:12px;height:12px;stroke:rgba(255,255,255,.5);fill:none;stroke-width:1.8;stroke-linecap:round;flex-shrink:0}
+/* ══ MAPILLARY IMAGE VIEWER ══ */
+#sv-pano-container{width:100%;height:100%;position:absolute;inset:0;overflow:hidden;background:#0a0e16;filter:none!important;isolation:isolate;mix-blend-mode:normal!important;transition:background .2s;}
+#sv-pano-container img{pointer-events:auto;filter:none!important;mix-blend-mode:normal!important;}
+/* ══ PERMANENT COLOR GRADING FIX (all providers) ══
+   Prevents any dynamically injected CSS filters from altering image colors.
+   Works for Mapillary, Google, and any future imagery source. */
+#sv-pano-container *{filter:none!important;mix-blend-mode:normal!important;}
+#sv-pano-container .gm-style{filter:none!important;}
+#sv-pano-container canvas{filter:none!important;mix-blend-mode:normal!important;}
+#sv-pano-container div{mix-blend-mode:normal!important;}
+/* Pannellum overrides — match our themes */
+#sv-pano-container .pnlm-container{background:#0a0e16!important;transition:background .2s;}
+#sv-pano-container .pnlm-about-msg,.pnlm-orientation-button{display:none!important;}
+/* Navigation arrows for sequence browsing */
+#sv-nav-prev,#sv-nav-next{position:absolute;top:50%;z-index:5;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(0,0,0,.7);color:rgba(255,255,255,.7);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s,border-color .15s,transform .15s,color .15s;}
+#sv-nav-prev{left:10px;transform:translateY(-50%);}
+#sv-nav-next{right:10px;transform:translateY(-50%);}
+#sv-nav-prev:hover,#sv-nav-next:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.4);color:#ffffff;}
+#sv-nav-prev svg,#sv-nav-next svg{width:18px;height:18px;}
+/* ══ LIGHT MODE FOR SV PANEL — comprehensive ══ */
+body.wi-theme-light #sv-panel{background:linear-gradient(145deg,rgba(255,255,255,.97),rgba(245,247,250,.99))!important;border:1px solid rgba(0,0,0,.1)!important;box-shadow:0 24px 60px rgba(0,0,0,.15),0 0 0 1px rgba(0,0,0,.04)!important;}
+body.wi-theme-light #sv-header{border-bottom:1px solid rgba(0,0,0,.06)!important;}
+body.wi-theme-light #sv-drag-handle span{color:rgba(0,0,0,.85)!important;}
+body.wi-theme-light #sv-drag-handle svg{color:rgba(0,0,0,.6)!important;}
+body.wi-theme-light .sv-grip{background:radial-gradient(circle,rgba(0,0,0,.15) 1.5px,transparent 1.5px)!important;}
+body.wi-theme-light #sv-controls button{color:rgba(0,0,0,.45)!important;}
+body.wi-theme-light #sv-controls button:hover{background:rgba(0,0,0,.06)!important;color:rgba(0,0,0,.8)!important;}
+body.wi-theme-light #sv-info-bar{color:rgba(0,0,0,.4)!important;background:rgba(0,0,0,.03)!important;}
+body.wi-theme-light #sv-key-indicator{color:rgba(0,0,0,.25)!important;}
+body.wi-theme-light #sv-loading{background:rgba(245,247,250,.9)!important;}
+body.wi-theme-light .sv-spinner{border-color:rgba(200,168,75,.15)!important;border-top-color:rgba(200,168,75,.8)!important;}
+body.wi-theme-light .sv-load-text{color:rgba(0,0,0,.4)!important;}
+body.wi-theme-light #sv-no-coverage{color:rgba(0,0,0,.5)!important;}
+body.wi-theme-light .sv-no-title{color:rgba(0,0,0,.7)!important;}
+body.wi-theme-light .sv-no-sub{color:rgba(0,0,0,.4)!important;}
+body.wi-theme-light #sv-retry-btn{border-color:rgba(200,168,75,.3)!important;background:rgba(200,168,75,.08)!important;color:rgba(140,100,0,.8)!important;}
+body.wi-theme-light #sv-retry-btn:hover{background:rgba(200,168,75,.18)!important;}
+body.wi-theme-light #sv-closest-hint{color:rgba(140,100,0,.7)!important;background:rgba(255,255,255,.06)!important;border-top:1px solid rgba(0,0,0,.06)!important;}
+body.wi-theme-light #sv-resize-handle{background:linear-gradient(135deg,transparent 50%,rgba(0,0,0,.12) 50%)!important;}
+body.wi-theme-light #sv-frame-wrap{background:#fff!important;}
+body.wi-theme-light #sv-no-coverage svg{stroke:rgba(0,0,0,.2)!important;}
+body.wi-theme-light #sv-no-coverage svg path[stroke*="239"]{stroke:rgba(239,68,68,.4)!important;}
+body.wi-theme-light #sv-nav-prev,body.wi-theme-light #sv-nav-next{background:rgba(255,255,255,.85)!important;border-color:rgba(0,0,0,.1)!important;color:rgba(0,0,0,.55)!important;}
+body.wi-theme-light #sv-nav-prev:hover,body.wi-theme-light #sv-nav-next:hover{background:rgba(255,255,255,.15)!important;border-color:rgba(255,255,255,.4)!important;color:#b08000!important;}
+body.wi-theme-light #sv-pano-container{background:#f5f7fa!important;}
+body.wi-theme-light #sv-pano-container .pnlm-container{background:#f5f7fa!important;}
+/* Light mode for SV mode hint bar */
+body.wi-theme-light #sv-mode-hint{background:rgba(255,255,255,.92)!important;border:1px solid rgba(0,0,0,.1)!important;color:rgba(0,0,0,.7)!important;box-shadow:0 8px 32px rgba(0,0,0,.1)!important;}
+body.wi-theme-light #sv-mode-hint svg{stroke:rgba(0,0,0,.5)!important;fill:none!important;}
+body.wi-theme-light #sv-mode-hint button{color:rgba(0,0,0,.35)!important;}
+body.wi-theme-light #sv-mode-hint button:hover{color:#1a1f2e!important;}
+/* Light mode pegman active state */
+body.wi-theme-light #pegman-control.sv-active{background:rgba(200,168,75,.18)!important;border-color:rgba(200,168,75,.5)!important;color:rgba(140,100,0,.9)!important;}
+/* ══ PEGMAN IN TOOLBAR ══ */
+#pegman-control.sv-active{background:rgba(255,255,255,.18)!important;border-color:rgba(255,255,255,.5)!important;color:#ffffff!important;}
+#map.sv-cursor,#map.sv-cursor *{cursor:crosshair!important;}
+.sv-pulse-ring{width:28px;height:28px;border-radius:50%;border:3px solid rgba(255,255,255,.8);animation:sv-pulse 1.2s ease-out forwards;}
+@keyframes sv-pulse{0%{transform:scale(.5);opacity:1;}100%{transform:scale(2);opacity:0;}}
+/* ══ SV MODE HINT BAR ══ */
+#sv-mode-hint{position:fixed;bottom:62px;left:50%;transform:translateX(-50%) translateY(20px);opacity:0;pointer-events:none;z-index:1100;background:rgba(8,12,18,.92);border:1px solid rgba(255,255,255,.25);border-radius:10px;padding:9px 16px;display:flex;align-items:center;gap:9px;color:rgba(255,255,255,.75);font-size:11.5px;font-weight:500;box-shadow:0 8px 32px rgba(0,0,0,.6);white-space:nowrap;transition:opacity .22s,transform .22s,background .2s,color .2s,border-color .2s;}
+#sv-mode-hint.show{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0);}
+#sv-mode-hint button{background:none;border:none;color:rgba(255,255,255,.45);cursor:pointer;font-size:15px;padding:0 0 0 6px;line-height:1;transition:color .14s;}
+#sv-mode-hint button:hover{color:#fff;}
+</style>
+<style>@keyframes wi-spin{to{transform:rotate(360deg)}}</style>
+<body>
+<!-- Loading overlay — fades out once map is ready -->
+<div id="wi-loader" style="position:fixed;inset:0;z-index:999999;background:#080c12;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.6s ease;">
+  <div style="width:40px;height:40px;border:2px solid rgba(255,255,255,.1);border-top-color:rgba(255,255,255,.6);border-radius:50%;animation:wi-spin 1s linear infinite;"></div>
+  <div style="margin-top:14px;font-family:Inter,sans-serif;font-size:11px;color:rgba(255,255,255,.3);letter-spacing:0.15em;">WorldIntelligence</div>
+</div>
+<!-- SKIP LINKS FOR ACCESSIBILITY -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<a href="#map" class="skip-link">Skip to map</a>
+
+<!-- SIDEBAR TOGGLE (always visible top-left) -->
+<button id="stog" onclick="toggleSide()" title="Toggle layers" aria-label="Toggle sidebar" aria-expanded="false" aria-controls="SIDE">
+            <svg viewBox="0 0 14 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" width="13">
+                <line x1="0" y1="1.5" x2="14" y2="1.5" />
+                <line x1="0" y1="5.5" x2="14" y2="5.5" />
+                <line x1="0" y1="9.5" x2="14" y2="9.5" />
+            </svg>
+        </button>
+
+<!-- TOOLS MENU (fixed top-left, always visible) -->
+<div id="tools-menu-wrap" role="navigation" aria-label="Tools menu">
+<button id="tools-menu-btn" onclick="document.getElementById('tools-dropdown').classList.toggle('open')" title="Tools" aria-label="Open tools menu" aria-expanded="false" aria-haspopup="true" aria-controls="tools-dropdown">
+<svg viewBox="0 0 16 4" fill="currentColor" width="14" height="4" aria-hidden="true"><circle cx="2" cy="2" r="1.5"/><circle cx="8" cy="2" r="1.5"/><circle cx="14" cy="2" r="1.5"/></svg>
+</button>
+<div id="tools-dropdown" class="tools-dropdown-panel" role="menu" aria-label="Tools dropdown">
+<div class="tools-section-label" role="separator">TOOLS</div>
+<button class="tools-item" onclick="document.getElementById('howto-modal').classList.toggle('show');document.getElementById('tools-dropdown').classList.remove('open')" role="menuitem" aria-label="Open how to use guide">
+<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 11v-1"/><path d="M8 8c0-1.5 2-1.5 2-3a2 2 0 0 0-4 0"/></svg>
+How to Use
+</button>
+<button class="tools-item" onclick="document.getElementById('shortcuts-modal').classList.toggle('show');document.getElementById('tools-dropdown').classList.remove('open')" role="menuitem" aria-label="Open keyboard shortcuts">
+<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="1" y="3" width="14" height="10" rx="2"/><path d="M4 7h1M7 7h1M10 7h1M4 10h8"/></svg>
+Keyboard Shortcuts
+<span class="tools-key" aria-label="Press question mark key">?</span>
+</button>
+<button id="export-btn" class="tools-item" onclick="window.SCREENSHOT&&window.SCREENSHOT.capture();document.getElementById('tools-dropdown').classList.remove('open')" role="menuitem" aria-label="Export map screenshot">
+<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="1" y="4" width="14" height="10" rx="2"/><circle cx="8" cy="9" r="2.5"/><path d="M5 4l1.5-2h3L11 4"/></svg>
+Export Map PNG
+<span class="tools-key" aria-label="Press E key">E</span>
+</button>
+<div class="tools-divider" role="separator"></div>
+<div class="tools-section-label" role="separator">SHARE</div>
+<button class="tools-item" onclick="shareCurrentView();document.getElementById('tools-dropdown').classList.remove('open')" role="menuitem" aria-label="Copy current map view link">
+<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M10 2l4 4-4 4"/><path d="M14 6H6a4 4 0 0 0-4 4v1"/></svg>
+Copy Map Link
+</button>
+<button class="tools-item" onclick="shareToX();document.getElementById('tools-dropdown').classList.remove('open')" role="menuitem" aria-label="Share on X (Twitter)">
+<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M12.6 2h2.1L9.9 7.3 15.5 14h-3.9l-3.4-4.5L4.3 14H2.2l5.2-5.7L2 2h4l3.1 4 3.5-4zm-.7 10.8h1.2L4.2 3.2H2.9l9 9.6z"/></svg>
+Post on X
+</button>
+<div class="tools-divider" role="separator"></div>
+<div class="tools-section-label" role="separator">DATA</div>
+<button class="tools-item" onclick="if(window.WI_FEATURES)window.WI_FEATURES.StatsPanel.exportCSV();document.getElementById('tools-dropdown').classList.remove('open')" role="menuitem" aria-label="Export CSV">
+<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M14 3v10H2V3z"/><path d="M2 6h12M5 9h2M5 11h4"/></svg>
+Export CSV
+</button>
+<button class="tools-item" onclick="if(window.WI_FEATURES)window.WI_FEATURES.StatsPanel.exportJSON();document.getElementById('tools-dropdown').classList.remove('open')" role="menuitem" aria-label="Export JSON">
+<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M14 3v10H2V3z"/><path d="M2 6h12M5 9h2M5 11h4"/></svg>
+Export JSON
+</button>
+<div class="tools-divider" role="separator"></div>
+<div class="tools-section-label" role="separator">ABOUT</div>
+<button class="tools-item" onclick="window.open('https://x.com/WorldIntelOSINT','_blank');document.getElementById('tools-dropdown').classList.remove('open')" role="menuitem" aria-label="Follow WorldIntelOSINT on X (opens in new tab)">
+<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M8 2a6 6 0 1 0 0 12A6 6 0 0 0 8 2z"/><path d="M8 7v4"/><circle cx="8" cy="5.5" r=".5" fill="currentColor"/></svg>
+Follow @WorldIntelOSINT
+</button>
+</div>
+</div>
+
+        <!-- MAIN SEARCH BAR -->
+        <div id="gsearch-group">
+            <div id="gsearch-wrap">
+                <div id="gsearch-bar">
+                    <svg viewBox="0 0 16 16">
+                        <circle cx="6.5" cy="6.5" r="4.5" />
+                        <line x1="10" y1="10" x2="14" y2="14" />
+                    </svg>
+                    <input
+                        id="gsearch-inp"
+                        type="text"
+                        placeholder="Search bases, airfields, locations..."
+                        autocomplete="off"
+                        spellcheck="false"
+                    />
+<button id="gsearch-clr" onclick="gsClear()" aria-label="Clear search">
+&#10005;
+</button>
+                </div>
+                <div id="gsearch-results"></div>
+            </div>
+        </div>
+        <!-- Mobile search toggle (near sidebar btn) -->
+        <button id="gsearch-tog-mob" onclick="gsToggle()" title="Toggle search" aria-label="Toggle search visibility">
+            <svg
+                viewBox="0 0 14 11"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                width="13"
+            >
+                <circle cx="5" cy="5" r="3.5" />
+                <line x1="8" y1="8" x2="12" y2="12" />
+            </svg>
+        </button>
+
+        <!-- TOP BAR -->
+        <div id="TOP">
+            <!-- LEFT: logo -->
+            <div class="logo">
+                <img
+                    src="/assets/img/logo-light.png"
+                    alt="WorldIntelligence"
+                    class="logo-img logo-img-dark"
+                />
+                <img
+                    src="/assets/img/logo-light.png"
+                    alt="WorldIntelligence"
+                    class="logo-img logo-img-light"
+                />
+                <div>
+                    <div class="logo-name">
+                                            <span class="logo-n1">World</span
+                                            ><span class="logo-dot"></span
+                                            ><span class="logo-n2">Intelligence</span
+                                            ><span class="logo-tag">OSINT</span>
+                                        </div>
+                </div>
+            </div>
+            <div class="tsp"></div>
+            <!-- RIGHT: controls + clock -->
+            <div class="tpill">
+            <button class="tp on" id="v2d" onclick="setView('2d')" title="2D Map">
+              2D
+            </button>
+            <button class="tp" id="v3d" onclick="setView('3d')" title="3D Globe">3D</button>
+          </div>
+          <button class="tp" id="theme-tog" onclick="toggleLightMode()" title="Toggle light/dark mode" aria-label="Toggle light mode">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" style="width:12px;height:12px"><circle cx="8" cy="8" r="3.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.5 3.5l1.4 1.4M11.1 11.1l1.4 1.4M3.5 12.5l1.4-1.4M11.1 4.9l1.4-1.4"/></svg>
+          </button>
+          <div class="tpill">
+                <button class="tp on" id="bsat" onclick="setTile(this, 'sat')" title="Satellite imagery">
+                    SAT
+                </button>
+                <button class="tp" id="bst" onclick="setTile(this, 'street')" title="Street map">
+                    Street
+                </button>
+                <button class="tp" id="bdk" onclick="setTile(this, 'dark')" title="Dark tiles">
+                    Dark
+                </button>
+                <button class="tp" id="bli" onclick="setTile(this, 'light')" title="Light tiles">
+                    Light
+                </button>
+                <button class="tp" id="bhi" onclick="openGoogleEarthHere()" title="Historical imagery">
+                    History
+                </button>
+            </div>
+            <div class="tdiv"></div>
+            <div id="clk" title="Current UTC time">00:00:00 UTC</div>
+            <div class="tdiv"></div>
+<div class="tpill">
+<button
+id="gsearch-tog-desk"
+class="active"
+onclick="gsToggle()"
+title="Toggle search bar"
+>
+<svg
+viewBox="0 0 16 16"
+fill="none"
+stroke="currentColor"
+stroke-width="1.8"
+stroke-linecap="round"
+>
+<circle cx="6.5" cy="6.5" r="4.5" />
+<line x1="10" y1="10" x2="14" y2="14" />
+</svg>
+Search
+</button>
+</div>
+            <div class="tdiv"></div>
+<!-- Desktop tools button (hidden on mobile) -->
+<div id="tools-menu-wrap-desk" style="position:relative;">
+<button id="tools-menu-btn-desk" class="tp" onclick="document.getElementById('tools-dropdown-desk').classList.toggle('open')" title="Tools" style="color:#ffffff;letter-spacing:1px;font-size:14px;padding:0 6px;">•••</button>
+                <div id="tools-dropdown-desk">
+                    <div class="tools-section-label">TOOLS</div>
+                    <button class="tools-item" onclick="document.getElementById('howto-modal').classList.toggle('show');document.getElementById('tools-dropdown-desk').classList.remove('open')">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><path d="M8 11v-1"/><path d="M8 8c0-1.5 2-1.5 2-3a2 2 0 0 0-4 0"/></svg>
+                        How to Use
+                    </button>
+                    <button class="tools-item" onclick="document.getElementById('shortcuts-modal').classList.toggle('show');document.getElementById('tools-dropdown-desk').classList.remove('open')">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="1" y="3" width="14" height="10" rx="2"/><path d="M4 7h1M7 7h1M10 7h1M4 10h8"/></svg>
+                        Keyboard Shortcuts <span class="tools-key">?</span>
+                    </button>
+                    <button class="tools-item" onclick="window.SCREENSHOT&&window.SCREENSHOT.capture();document.getElementById('tools-dropdown-desk').classList.remove('open')">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="1" y="4" width="14" height="10" rx="2"/><circle cx="8" cy="9" r="2.5"/><path d="M5 4l1.5-2h3L11 4"/></svg>
+                        Export Map PNG <span class="tools-key">E</span>
+                    </button>
+                    <div class="tools-divider"></div>
+                    <div class="tools-section-label">SHARE</div>
+                    <button class="tools-item" onclick="shareCurrentView();document.getElementById('tools-dropdown-desk').classList.remove('open')">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 2l4 4-4 4"/><path d="M14 6H6a4 4 0 0 0-4 4v1"/></svg>
+                        Copy Map Link
+                    </button>
+                    <button class="tools-item" onclick="shareToX();document.getElementById('tools-dropdown-desk').classList.remove('open')">
+                        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M12.6 2h2.1L9.9 7.3 15.5 14h-3.9l-3.4-4.5L4.3 14H2.2l5.2-5.7L2 2h4l3.1 4 3.5-4zm-.7 10.8h1.2L4.2 3.2H2.9l9 9.6z"/></svg>
+                        Post on X
+</button>
+                    <div class="tools-divider"></div>
+                    <div class="tools-section-label">DATA</div>
+                    <button class="tools-item" onclick="if(window.WI_FEATURES)window.WI_FEATURES.StatsPanel.exportCSV();document.getElementById('tools-dropdown-desk').classList.remove('open')">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M14 3v10H2V3z"/><path d="M2 6h12M5 9h2M5 11h4"/></svg>
+                        Export CSV
+                    </button>
+                    <button class="tools-item" onclick="if(window.WI_FEATURES)window.WI_FEATURES.StatsPanel.exportJSON();document.getElementById('tools-dropdown-desk').classList.remove('open')">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M14 3v10H2V3z"/><path d="M2 6h12M5 9h2M5 11h4"/></svg>
+                        Export JSON
+                    </button>
+</div>
+</div>
+<div class="tdiv"></div>
+<a
+id="x-follow-btn"
+href="https://x.com/WorldIntelOSINT"
+target="_blank"
+rel="noopener noreferrer"
+title="Follow on X — Opens in new window"
+>
+<span class="x-logo">𝕏</span>Follow
+</a>
+</div>
+
+<button id="layers-3d-btn" onclick="toggleImageryPicker()" title="Change 3D Imagery">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 2L2 7l10 5 10-5-10-5z" />
+  <path d="M2 17l10 5 10-5" />
+  <path d="M2 12l10 5 10-5" />
+</svg>
+Layers
+</button>
+
+<!-- Note: 3D layer controls now use the same sidebar as 2D -->
+
+<!-- LIVE TICKER -->
+        <div id="ticker-wrap">
+            <div id="ticker-inner"></div>
+        </div>
+
+        <!-- LEFT SIDEBAR -->
+        <div id="SIDE">
+            <div class="sh">
+                <div class="sh-row">
+                    <div class="sh-title">Intelligence Layers</div>
+                    <div class="sh-ct" id="sct">3 active</div>
+                </div>
+                <div class="srch">
+                    <svg
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                    >
+                        <circle cx="6.5" cy="6.5" r="4.5" />
+                        <line x1="10" y1="10" x2="14" y2="14" />
+                    </svg>
+                    <input
+                        type="text"
+                        placeholder="Search layers..."
+                        oninput="filterL(this.value)"
+                    />
+                </div>
+            </div>
+            <div id="lscr">
+                <div class="glbl">&#9632; Naval</div>
+                <div class="lr" data-id="osm_naval" onclick="togL(this)">
+                    <div
+                        class="ldot"
+                        style="background: #60a5fa; color: #60a5fa"
+                    ></div>
+                    <span class="lname">Naval Bases (OSM)</span
+                    ><span class="lct" id="osm-naval-ct">...</span>
+                    <div class="tog"></div>
+                </div>
+                <div class="glbl">&#9632; Air</div>
+                <div class="lr" data-id="osm_air" onclick="togL(this)">
+                    <div
+                        class="ldot"
+                        style="background: #ff4d6d; color: #ff4d6d"
+                    ></div>
+                    <span class="lname">Air / Coast Guard (OSM)</span
+                    ><span class="lct" id="osm-air-ct">...</span>
+                    <div class="tog"></div>
+                </div>
+                <div class="glbl">&#9632; Military</div>
+                <div class="lr on" data-id="osm_mil" onclick="togL(this)">
+                    <div
+                        class="ldot"
+                        style="background: #ffffff; color: #ffffff"
+                    ></div>
+                    <span class="lname">Military Bases (OSM)</span
+                    ><span class="lct" id="osm-ct">...</span>
+                    <div class="tog"></div>
+                </div>
+
+                <div class="lr" data-id="bases_us" onclick="togL(this)">
+                    <div
+                        class="ldot"
+                        style="background: #60a5fa; color: #60a5fa"
+                    ></div>
+                    <span class="lname">US Military (MIRTA)</span
+                    ><span class="lct">815</span>
+                    <div class="tog"></div>
+                </div>
+                <div class="lr" data-id="bases_intl" onclick="togL(this)">
+                    <div
+                        class="ldot"
+                        style="background: #f0f0f0; color: #f0f0f0"
+                    ></div>
+                    <span class="lname">Intl Bases (curated)</span
+                    ><span class="lct">187</span>
+                    <div class="tog"></div>
+                </div>
+                <div class="lr on" data-id="nuclear" onclick="togL(this)">
+                    <div
+                        class="ldot"
+                        style="background: #4ade80; color: #4ade80"
+                    ></div>
+                    <span class="lname">Nuclear Facilities</span
+                    ><span class="lct">114</span>
+                    <div class="tog"></div>
+                </div>
+                <div class="lr" data-id="irradiators" onclick="togL(this)">
+                    <div
+                        class="ldot"
+                        style="background: #a3e635; color: #a3e635"
+                    ></div>
+                    <span class="lname">Gamma Irradiators</span
+                    ><span class="lct">124</span>
+                    <div class="tog"></div>
+                </div>
+                <div class="lr" data-id="apts" onclick="togL(this)">
+                    <div
+                        class="ldot"
+                        style="background: #34d399; color: #34d399"
+                    ></div>
+                    <span class="lname">Cyber / APT Actors</span
+                    ><span class="lct">4</span>
+                    <div class="tog"></div>
+                </div>
+                <div class="lr" data-id="spaceports" onclick="togL(this)">
+                    <div
+                        class="ldot"
+                        style="background: #c084fc; color: #c084fc"
+                    ></div>
+                    <span class="lname">Spaceports</span
+                    ><span class="lct">12</span>
+                    <div class="tog"></div>
+                </div>
+                <div class="glbl">&#9632; Conflicts</div>
+                <div class="lr on" data-id="conflicts" onclick="togL(this)">
+                    <div
+                        class="ldot"
+                        style="background: #ff4d6d; color: #ff4d6d"
+                    ></div>
+                    <span class="lname">Active Conflict Zones</span
+                    ><span class="lct">9</span>
+                    <div class="tog"></div>
+                </div>
+                <div class="lr" data-id="hotspots" onclick="togL(this)">
+                    <div
+                        class="ldot"
+                        style="background: #fb923c; color: #fb923c"
+                    ></div>
+                    <span class="lname">Intel Hotspots</span
+                    ><span class="lct">28</span>
+                    <div class="tog"></div>
+                </div>
+                <div class="glbl">&#9632; Infrastructure</div>
+                <div class="lr" data-id="cables" onclick="togL(this)">
+                    <div
+                        class="ldot"
+                        style="background: #38bdf8; color: #38bdf8"
+                    ></div>
+                    <span class="lname">Undersea Cables</span
+                    ><span class="lct">86</span>
+                    <div class="tog"></div>
+                </div>
+                <div class="lr" data-id="pipelines" onclick="togL(this)">
+                    <div
+                        class="ldot"
+                        style="background: #a3e635; color: #a3e635"
+                    ></div>
+                    <span class="lname">Oil &amp; Gas Pipelines</span
+                    ><span class="lct">88</span>
+                    <div class="tog"></div>
+                </div>
+                <div class="lr" data-id="airports" onclick="togL(this)">
+                    <div
+                        class="ldot"
+                        style="background: #94a3b8; color: #94a3b8"
+                    ></div>
+                    <span class="lname">Strategic Airports</span
+                    ><span class="lct">109</span>
+                    <div class="tog"></div>
+                </div>
+                <div class="lr" data-id="ports" onclick="togL(this)">
+                    <div
+                        class="ldot"
+                        style="background: #38bdf8; color: #38bdf8"
+                    ></div>
+                    <span class="lname">Major Ports</span
+                    ><span class="lct">62</span>
+                    <div class="tog"></div>
+                </div>
+                <div class="lr" data-id="waterways" onclick="togL(this)">
+                    <div
+                        class="ldot"
+                        style="background: #38bdf8; color: #38bdf8"
+                    ></div>
+                    <span class="lname">Strategic Waterways</span
+                    ><span class="lct">9</span>
+                    <div class="tog"></div>
+                </div>
+                <div class="glbl">&#9632; Economy</div>
+                <div class="lr" data-id="econ" onclick="togL(this)">
+                    <div
+                        class="ldot"
+                        style="background: #fcd34d; color: #fcd34d"
+                    ></div>
+                    <span class="lname">Economic Centers</span
+                    ><span class="lct">41</span>
+                    <div class="tog"></div>
+                </div>
+                <div class="lr" data-id="finance" onclick="togL(this)">
+                    <div
+                        class="ldot"
+                        style="background: #fcd34d; color: #fcd34d"
+                    ></div>
+                    <span class="lname">Stock Exchanges &amp; Banks</span
+                    ><span class="lct">64</span>
+                    <div class="tog"></div>
+                </div>
+                <div class="lr" data-id="minerals" onclick="togL(this)">
+                    <div
+                        class="ldot"
+                        style="background: #fb923c; color: #fb923c"
+                    ></div>
+                    <span class="lname">Critical Minerals</span
+                    ><span class="lct">10</span>
+                    <div class="tog"></div>
+                </div>
+                <div class="lr" data-id="commodity" onclick="togL(this)">
+                    <div
+                        class="ldot"
+                        style="background: #fb923c; color: #fb923c"
+                    ></div>
+                    <span class="lname">Commodity Hubs</span
+                    ><span class="lct">81</span>
+                    <div class="tog"></div>
+                </div>
+                <div class="glbl">&#9632; Technology</div>
+                <div class="lr" data-id="tech" onclick="togL(this)">
+                    <div
+                        class="ldot"
+                        style="background: #a78bfa; color: #a78bfa"
+                    ></div>
+                    <span class="lname">Tech Hubs</span
+                    ><span class="lct">105</span>
+                    <div class="tog"></div>
+                </div>
+                <div class="glbl">&#9632; Live Data</div>
+                <div class="lr" id="eq-toggle-row" onclick="(function(el){el.classList.toggle('on');window.EARTHQUAKES&&window.EARTHQUAKES.toggle(el.classList.contains('on'));})(this)">
+                    <div class="ldot" style="background:#a3e635;color:#a3e635"></div>
+                    <span class="lname">Earthquakes</span>
+                    <span class="lct" id="eq-badge">0</span>
+                    <div class="tog"></div>
+                </div>
+            </div>
+            <div id="sstat">
+                <!-- PINS PANEL TOGGLE BUTTON (sidebar entry point) -->
+                <div id="watchlist-section">
+                    <button id="wl-open-panel-btn" onclick="window.ALERTS&amp;&amp;window.ALERTS.togglePinPanel()" class="wl-open-panel-btn" title="Open pins panel">
+                        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0;"><path d="M7 1.5C4.5 1.5 2.5 3.5 2.5 6c0 3 4.5 6.5 4.5 6.5s4.5-3.5 4.5-6.5c0-2.5-2-4.5-4.5-4.5z"/><circle cx="7" cy="6" r="1.8"/></svg>
+                        <span>My Pins</span>
+                        <span id="wl-count-badge" class="wl-count-badge" style="display:none;">0</span>
+                        <svg class="wl-open-chevron" viewBox="0 0 8 8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="width:8px;height:8px;flex-shrink:0;opacity:.5;margin-left:auto;"><polyline points="3,1.5 6,4 3,6.5"/></svg>
+                    </button>
+                    <!-- Pin chip container (kept for rendering, but hidden in sidebar; shown in panel) -->
+                    <div id="watchlist-chips" style="display:none;"></div>
+                    <!-- Tour bar (kept here for DOM stability, but shown in panel) -->
+                    <div id="wl-tour-bar" class="wl-tour-bar" style="display:none;">
+                        <div class="wl-tour-info">
+                            <span class="wl-tour-label" id="wl-tour-label-text">Tour</span>
+                            <span class="wl-tour-progress" id="wl-tour-progress">1 / 4</span>
+                        </div>
+                        <div class="wl-tour-track"><div class="wl-tour-fill" id="wl-tour-fill"></div></div>
+                        <div class="wl-tour-name" id="wl-tour-name">Pin 1</div>
+                        <div class="wl-tour-controls">
+                            <button class="wl-tour-btn" id="wl-tour-prev" onclick="window.ALERTS&amp;&amp;window.ALERTS.tourPrev()" title="Previous pin" aria-label="Previous pin">
+                                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:10px;height:10px;"><polyline points="7.5,2 3.5,6 7.5,10"/></svg>
+                            </button>
+                            <button class="wl-tour-btn wl-tour-btn-primary" id="wl-tour-playpause" onclick="window.ALERTS&amp;&amp;window.ALERTS.tourTogglePause()" title="Pause / Resume" aria-label="Pause or resume tour">
+                                <svg class="wl-tour-icon-pause" viewBox="0 0 12 12" fill="currentColor" style="width:10px;height:10px;"><rect x="3" y="2.5" width="2" height="7" rx="0.5"/><rect x="7" y="2.5" width="2" height="7" rx="0.5"/></svg>
+                                <svg class="wl-tour-icon-play" viewBox="0 0 12 12" fill="currentColor" style="width:10px;height:10px;display:none;"><path d="M3 2.5l7 3.5-7 3.5z"/></svg>
+                            </button>
+                            <button class="wl-tour-btn" id="wl-tour-next" onclick="window.ALERTS&amp;&amp;window.ALERTS.tourNext()" title="Next pin" aria-label="Next pin">
+                                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:10px;height:10px;"><polyline points="4.5,2 8.5,6 4.5,10"/></svg>
+                            </button>
+                            <button class="wl-tour-btn wl-tour-speed" id="wl-tour-speed" onclick="window.ALERTS&amp;&amp;window.ALERTS.tourCycleSpeed()" title="Tour speed" aria-label="Cycle tour speed">1×</button>
+                            <button class="wl-tour-skip" id="wl-tour-skip" onclick="window.ALERTS&amp;&amp;window.ALERTS.stopPinTour()" title="Stop tour" aria-label="Stop tour">
+                                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" style="width:10px;height:10px;"><line x1="3" y1="3" x2="9" y2="9"/><line x1="9" y1="3" x2="3" y2="9"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div style="height:1px;background:rgba(255,255,255,0.06);margin:10px 0 12px;"></div>
+                <div class="sg">
+                    <div class="sb">
+                        <div class="slbl">Layers</div>
+                        <div class="sval" id="sl">3</div>
+                    </div>
+                    <div class="sb">
+                        <div class="slbl">Markers</div>
+                        <div class="sval" id="sm">0</div>
+                    </div>
+                    <div class="sb">
+                        <div class="slbl">OSM</div>
+                        <div class="sval" id="so">0</div>
+                    </div>
+                    <div class="sb">
+                        <div class="slbl">Regions</div>
+                        <div class="sval" id="sr" style="font-size:14px;margin-top:4px;">0/20</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OSM PROGRESS â€” top right -->
+        <div id="rpanel">
+            <div class="rph">
+                <div class="rpd"></div>
+                <div class="rpt" id="rpt">Starting regional fetch...</div>
+                <div class="rpn" id="rpn">0</div>
+            </div>
+            <div class="rmeta">
+                <div class="reta" id="reta">ETA calibrating...</div>
+            </div>
+            <div class="rpchips" id="rpchips"></div>
+            <div id="rp-kv-status" style="font-size:10px;margin-top:4px;padding:3px 6px;border-radius:4px;display:none;"></div>
+            <div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:6px;font-family:Inter,sans-serif;line-height:1.4;">Please avoid dragging the map while loading — it may cause temporary lag.</div>
+        </div>
+
+<main id="main-content" aria-label="Map visualization">
+<!-- Leaflet 2D map -->
+<div id="map" role="application" aria-label="Interactive world map"></div>
+<!-- Cesium 3D Globe -->
+<div id="cesiumContainer" role="application" aria-label="Cesium 3D Globe" style="display:none; position:absolute; top:0; left:0; right:0; bottom:0; z-index:5; background:transparent;"></div>
+</main>
+
+        <!-- SHARE TOAST -->
+        <div id="share-toast"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;display:inline-block;vertical-align:-2px;margin-right:6px;"><polyline points="20 6 9 17 4 12"/></svg>Link copied to clipboard</div>
+
+        <!-- BOTTOM DRAWER HANDLE (always visible at bottom) -->
+        <div id="drawer-handle" onclick="toggleDrawer()" title="Open Live News">
+            <span class="dh-dot"></span>
+            <div class="dh-bar-wrap">
+                <div class="dh-pill"></div>
+                <span class="dh-label">
+                    <span class="dh-live-dot"></span>
+                    Live News
+                    <svg class="dh-chevron" viewBox="0 0 12 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1,6 6,1 11,6"/></svg>
+                </span>
+            </div>
+        </div>
+
+        <!-- BOTTOM PULL-UP DRAWER -->
+        <div id="bottom-drawer">
+            <!-- Top strip: grab handle + refresh + close -->
+            <div id="drawer-topstrip">
+                <div id="drawer-grab"></div>
+                <div style="flex:1"></div>
+                <button id="drawer-refresh-btn" onclick="drawerRefreshNews()">
+                    <svg viewBox="0 0 16 16" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 8A6 6 0 0 1 3 11.5" />
+                        <path d="M2 8a6 6 0 0 1 11-3.5" />
+                        <polyline points="2,5 2,8 5,8" />
+                        <polyline points="14,11 14,8 11,8" />
+                    </svg>
+                    Refresh
+                </button>
+                <button id="drawer-close-btn" onclick="toggleDrawer()">✕</button>
+            </div>
+
+            <!-- Body: Live News only -->
+            <div id="drawer-body">
+                <div class="drawer-pane active" id="drawer-pane-news">
+                    <div id="news-player-wrap">
+                        <iframe id="news-player" title="Live news video player" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>
+                    </div>
+                    <div id="news-channels"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- GOOGLE AUTH — custom button, no GSI iframe styling -->
+        <div id="wi-auth-container" style="position:fixed;bottom:14px;right:120px;z-index:610;align-items:center;gap:8px;display:none;">
+
+          <!-- Custom Google Sign-In button — black bg (dark) / white bg (light), gold border -->
+          <div id="wi-google-signin" style="display:none;align-items:center;">
+            <button id="wi-google-signin-btn" class="wi-auth-btn" onclick="if(window.google&&window.google.accounts&&window.google.accounts.id){window.google.accounts.id.prompt();}else{alert('Google sign-in is still loading. Please wait a moment and try again.');}">
+              <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              Continue with Google
+            </button>
+          </div>
+
+          <!-- User profile area — black bg (dark) / white bg (light), gold border -->
+          <div id="wi-google-user" class="wi-auth-profile" style="display:none;align-items:center;gap:9px;cursor:pointer;position:relative;padding:4px 8px;border-radius:6px;border:1px solid rgba(255,255,255,.06);transition:border-color .15s;" title="Click for options" onmouseover="this.style.borderColor='rgba(255,255,255,.12)'" onmouseout="this.style.borderColor='rgba(255,255,255,.06)'">
+            <img id="wi-google-avatar" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" style="width:24px;height:24px;border-radius:50%;object-fit:cover;border:1px solid rgba(255,255,255,.06);" referrerpolicy="no-referrer" />
+            <span id="wi-google-name" style="font-family:Inter,sans-serif;font-size:12px;font-weight:500;color:rgba(255,255,255,.6);white-space:nowrap;max-width:120px;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.01em;"></span>
+            <div id="wi-google-user-menu" style="display:none;position:absolute;bottom:52px;right:0;background:#0d0e12;border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:4px;box-shadow:0 4px 16px rgba(0,0,0,.4);min-width:160px;z-index:620;overflow:hidden;">
+              <button id="wi-google-signout" style="display:flex;align-items:center;gap:8px;width:100%;padding:12px 14px;border:none;background:transparent;border-radius:10px;color:#ef4444;font-family:Inter,sans-serif;font-size:13px;font-weight:600;cursor:pointer;text-align:left;transition:background .12s;" onmouseover="this.style.background='rgba(239,68,68,.08)'" onmouseout="this.style.background='transparent'">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                Sign Out
+              </button>
+            </div>
+          </div>
+
+        </div>
+        <script>
+          // Toggle user menu on click
+          (function(){
+            function initMenuToggle(){
+              var userArea = document.getElementById('wi-google-user');
+              var menu = document.getElementById('wi-google-user-menu');
+              if(!userArea||!menu) { setTimeout(initMenuToggle,200); return; }
+              userArea.addEventListener('click', function(e){
+                e.stopPropagation();
+                menu.style.display = (menu.style.display==='none'||!menu.style.display) ? 'block' : 'none';
+              });
+            }
+            if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',initMenuToggle); }
+            else { initMenuToggle(); }
+          })();
+        </script>
+
+        <!-- LEGEND -->
+        <div id="leg">
+            <div class="lh">Legend</div>
+            <div class="lr2">
+                <div class="lgd" style="background: #ffffff"></div>
+                Military
+            </div>
+            <div class="lr2">
+                <div class="lgd" style="background: #60a5fa"></div>
+                US Bases
+            </div>
+            <div class="lr2" style="margin-top: 3px">
+                <div class="lgq" style="background: #4ade80"></div>
+                Nuclear
+            </div>
+            <div class="lr2">
+                <div class="lgd" style="background: #ff4d6d"></div>
+                Conflicts
+            </div>
+            <div class="lr2">
+                <div class="lgd" style="background: #fb923c"></div>
+                Hotspots
+            </div>
+            <div class="lr2" style="margin-top: 3px">
+                <div
+                    class="lgl"
+                    style="background: rgba(56, 189, 248, 0.75)"
+                ></div>
+                Cable
+            </div>
+            <div class="lr2">
+                <div
+                    class="lgl"
+                    style="background: rgba(163, 230, 53, 0.7)"
+                ></div>
+                Pipeline
+            </div>
+            <div class="lr2">
+                <div class="lgd" style="background: #38bdf8"></div>
+                Ports
+            </div>
+            <div class="lr2">
+                <div class="lgd" style="background: #a3e635"></div>
+                Earthquakes
+            </div>
+        </div>
+
+        <!-- DETAIL CARD -->
+        <div id="det">
+            <div class="dh">
+                <div class="dn" id="det-n">—</div>
+                <button class="dcl" onclick="closeDet()">&#10005;</button>
+            </div>
+            <div id="det-b"></div>
+        </div>
+
+        <!-- TOAST CONTAINER (legacy, enhanced by features.js) -->
+        <div id="toast-container"></div>
+        <!-- Enhanced Toast Container (features.js) -->
+        <div id="wi-toast-container"></div>
+
+        <!-- PINS PANEL (slides in from the right, like bookmarks) -->
+        <div id="wi-pins-panel" class="wi-panel">
+            <div class="wi-panel-header">
+                <h3><svg class="wi-h-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> My Pins <span id="wl-panel-count-badge" class="wi-bm-count-badge" style="display:none;">0</span></h3>
+                <button class="wi-panel-close" onclick="window.ALERTS&amp;&amp;window.ALERTS.togglePinPanel()" aria-label="Close pins panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+            </div>
+            <div class="wi-panel-body">
+                <!-- Action toolbar -->
+                <div class="wi-bm-toolbar" style="margin-bottom:8px;">
+                    <button id="wl-pin-btn" onclick="window.ALERTS&amp;&amp;window.ALERTS.startPinDrop()" class="wi-bm-add" title="Drop a pin on the map (press P)">
+                        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:10px;height:10px;"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+                        Add Pin
+                    </button>
+                    <button id="wl-search-btn" onclick="window.ALERTS&amp;&amp;window.ALERTS.togglePinSearch()" class="wi-bm-add" title="Search pins" style="background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08);color:rgba(232,237,245,.6);">
+                        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;"><circle cx="6" cy="6" r="4.2"/><line x1="9.2" y1="9.2" x2="12.5" y2="12.5"/></svg>
+                    </button>
+                    <button id="wl-sort-btn" onclick="window.ALERTS&amp;&amp;window.ALERTS.togglePinSort()" class="wi-bm-add" title="Sort pins" style="display:none;background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08);color:rgba(232,237,245,.6);">
+                        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;"><path d="M3 4h8"/><path d="M5 7h6"/><path d="M7 10h4"/></svg>
+                    </button>
+                    <button id="wl-more-btn" onclick="window.ALERTS&amp;&amp;window.ALERTS.togglePinMenu()" class="wi-bm-add" title="More actions" style="display:none;background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08);color:rgba(232,237,245,.6);">
+                        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;"><circle cx="3.5" cy="7" r="1"/><circle cx="7" cy="7" r="1"/><circle cx="10.5" cy="7" r="1"/></svg>
+                    </button>
+                    <button id="wl-clear-btn" onclick="window.ALERTS&amp;&amp;window.ALERTS.clearAllPins()" class="wi-bm-add" title="Clear all pins" style="display:none;background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08);color:rgba(232,237,245,.6);">
+                        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;"><path d="M2.5 4h9"/><path d="M5 4V2.5h4V4"/><path d="M3.5 4l.5 8h6l.5-8"/><path d="M5.5 6.5v3"/><path d="M8.5 6.5v3"/></svg>
+                    </button>
+                </div>
+                <!-- Search row -->
+                <div id="wl-search-wrap" class="wl-search-wrap" style="display:none;">
+                    <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;flex-shrink:0;opacity:.5;"><circle cx="6" cy="6" r="4.2"/><line x1="9.2" y1="9.2" x2="12.5" y2="12.5"/></svg>
+                    <input id="wl-search-inp" type="text" placeholder="Filter pins by name…" autocomplete="off" />
+                    <button id="wl-search-clear" onclick="window.ALERTS&amp;&amp;window.ALERTS.clearPinSearch()" title="Clear filter (Esc)" aria-label="Clear filter" style="display:none;">✕</button>
+                </div>
+                <!-- Sort row -->
+                <div id="wl-sort-wrap" class="wl-sort-wrap" style="display:none;margin-bottom:8px;">
+                    <span class="wl-sort-label">Sort by</span>
+                    <select id="wl-sort-sel">
+                        <option value="newest">Newest first</option>
+                        <option value="oldest">Oldest first</option>
+                        <option value="name">Name A → Z</option>
+                        <option value="distance">Nearest to map center</option>
+                        <option value="recent">Recently flown-to</option>
+                    </select>
+                </div>
+                <!-- Overflow menu -->
+                <div id="wl-menu" class="wl-menu" style="display:none;">
+                    <button onclick="window.ALERTS&amp;&amp;window.ALERTS.startPinTour()" class="wl-menu-item">
+                        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;flex-shrink:0;"><path d="M2 7a5 5 0 1 1 10 0a5 5 0 1 1 -10 0"/><path d="M7 2v1.5"/><path d="M7 10.5v1.5"/><polyline points="5.5,4.5 7,7 8.5,4.5"/></svg>
+                        <span>Fly to all pins…</span>
+                    </button>
+                    <button onclick="window.ALERTS&amp;&amp;window.ALERTS.duplicateLastPin()" class="wl-menu-item" id="wl-menu-duplicate" style="display:none;">
+                        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;flex-shrink:0;"><rect x="2" y="2" width="7" height="7" rx="1"/><path d="M5 9v2a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H9"/></svg>
+                        <span>Duplicate last pin</span>
+                    </button>
+                    <button onclick="window.ALERTS&amp;&amp;window.ALERTS.exportPins()" class="wl-menu-item">
+                        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;flex-shrink:0;"><path d="M7 2v8"/><path d="M3.5 6.5L7 10l3.5-3.5"/><path d="M2 12h10"/></svg>
+                        <span>Export pins…</span>
+                    </button>
+                    <button onclick="window.ALERTS&amp;&amp;window.ALERTS.importPins()" class="wl-menu-item">
+                        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;flex-shrink:0;"><path d="M7 10V2"/><path d="M3.5 5.5L7 2l3.5 3.5"/><path d="M2 12h10"/></svg>
+                        <span>Import pins…</span>
+                    </button>
+                </div>
+                <!-- Pin list (chips container — moved here from sidebar) -->
+                <div id="wl-panel-chips" class="wi-bm-list"></div>
+                <!-- Keyboard hint -->
+                <div class="wl-kbd-hint" id="wl-kbd-hint" style="display:none;margin-top:12px;">
+                    <kbd>P</kbd> add pin &nbsp;·&nbsp; <kbd>?</kbd> all shortcuts &nbsp;·&nbsp; <kbd>dbl-click</kbd> edit
+                </div>
+            </div>
+        </div>
+
+        <!-- PIN NAME DIALOG -->
+        <div id="pin-dialog" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9800;align-items:center;justify-content:center;">
+            <div style="background:rgba(6,8,16,.99);border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:24px;width:300px;box-shadow:0 20px 60px rgba(0,0,0,.8);">
+                <div style="font-family:'Inter',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;">Name this pin</div>
+                <div style="font-family:'Inter',sans-serif;font-size:11px;color:rgba(255,255,255,.4);margin-bottom:14px;">Give your pin a name to identify it on the map</div>
+                <input id="pin-name-inp" placeholder="e.g. Ukraine Front Line, Oil Depot…"
+                    style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:9px 12px;font-family:'Inter',sans-serif;font-size:12px;color:#e8edf5;outline:none;margin-bottom:12px;" />
+                <div style="display:flex;gap:8px;">
+                    <button onclick="window.ALERTS&&window.ALERTS.confirmPin()" style="flex:1;padding:9px;border-radius:8px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);color:#ffffff;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;cursor:pointer;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;display:inline-block;vertical-align:-2px;margin-right:4px;"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Place Pin
+                    </button>
+                    <button onclick="window.ALERTS&&window.ALERTS.cancelPin()" style="padding:9px 14px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.5);font-family:'Inter',sans-serif;font-size:12px;cursor:pointer;">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PIN RENAME / EDIT DIALOG -->
+        <div id="pin-rename-dialog" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9800;align-items:center;justify-content:center;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);">
+            <div style="background:rgba(6,8,16,.99);border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:24px;width:320px;box-shadow:0 20px 60px rgba(0,0,0,.8);animation:wi-confirm-in .2s cubic-bezier(.34,1.56,.64,1) 1;">
+                <div style="font-family:'Inter',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;">Edit pin</div>
+                <div style="font-family:'Inter',sans-serif;font-size:11px;color:rgba(255,255,255,.4);margin-bottom:14px;">Update the name and notes for this pin</div>
+                <label style="font-family:'Inter',sans-serif;font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5);display:block;margin-bottom:4px;">Name</label>
+                <input id="pin-rename-inp" placeholder="Pin name…"
+                    style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:9px 12px;font-family:'Inter',sans-serif;font-size:12px;color:#e8edf5;outline:none;margin-bottom:12px;" />
+                <label style="font-family:'Inter',sans-serif;font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5);display:block;margin-bottom:4px;">Notes</label>
+                <textarea id="pin-notes-inp" placeholder="Add notes, context, or a description…" rows="3"
+                    style="width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.3);border-radius:8px;padding:9px 12px;font-family:'Inter',sans-serif;font-size:12px;color:#e8edf5;outline:none;margin-bottom:12px;resize:vertical;min-height:60px;line-height:1.4;"></textarea>
+                <div style="display:flex;gap:8px;">
+                    <button onclick="window.ALERTS&amp;&amp;window.ALERTS.confirmRename()" style="flex:1;padding:9px;border-radius:8px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);color:#ffffff;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;cursor:pointer;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;display:inline-block;vertical-align:-2px;margin-right:4px;"><polyline points="20 6 9 17 4 12"/></svg>Save
+                    </button>
+                    <button onclick="window.ALERTS&amp;&amp;window.ALERTS.cancelRename()" style="padding:9px 14px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.5);font-family:'Inter',sans-serif;font-size:12px;cursor:pointer;">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- STYLED CONFIRM DIALOG (replaces native window.confirm) -->
+        <div id="wi-confirm-overlay" onclick="if(event.target===this&&window._wiConfirmCancel)window._wiConfirmCancel()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9850;align-items:center;justify-content:center;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);">
+            <div id="wi-confirm-card" class="wi-confirm-card">
+                <div class="wi-confirm-icon" id="wi-confirm-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:28px;height:28px;"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+                <div class="wi-confirm-title" id="wi-confirm-title">Confirm</div>
+                <div class="wi-confirm-message" id="wi-confirm-message">Are you sure?</div>
+                <div class="wi-confirm-actions">
+                    <button class="wi-confirm-cancel" id="wi-confirm-cancel-btn">Cancel</button>
+                    <button class="wi-confirm-ok" id="wi-confirm-ok-btn">Confirm</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SETTINGS MODAL REMOVED -->
+
+<!-- KEYBOARD SHORTCUTS MODAL -->
+<div id="shortcuts-modal" class="modal-backdrop" onclick="if(event.target===this) this.classList.remove('show')">
+<div class="modal-content" style="width:420px;max-height:85vh;padding:0;overflow:hidden;" onclick="event.stopPropagation()">
+<div class="shortcuts-header">
+<h2>Keyboard Shortcuts</h2>
+<button class="shortcuts-close-btn" onclick="document.getElementById('shortcuts-modal').classList.remove('show')" aria-label="Close keyboard shortcuts">✕</button>
+</div>
+<div class="shortcuts-content">
+<div class="shortcuts-category">
+<div class="shortcuts-category-header">
+<span class="shortcuts-category-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;display:inline-block;"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg></span>
+<h3 class="shortcuts-category-title">Navigation</h3>
+</div>
+<div class="shortcuts-item">
+<span class="shortcuts-key">S</span>
+<span class="shortcuts-label">Toggle Sidebar</span>
+</div>
+<div class="shortcuts-item">
+<span class="shortcuts-key">L</span>
+<span class="shortcuts-label">Toggle Live News</span>
+</div>
+<div class="shortcuts-item">
+<span class="shortcuts-key">F</span>
+<span class="shortcuts-label">Toggle Full Screen</span>
+</div>
+<div class="shortcuts-item">
+<span class="shortcuts-key">Esc</span>
+<span class="shortcuts-label">Close Panel / Drawer</span>
+</div>
+</div>
+<div class="shortcuts-separator"></div>
+<div class="shortcuts-category">
+<div class="shortcuts-category-header">
+<span class="shortcuts-category-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;display:inline-block;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+<h3 class="shortcuts-category-title">Actions</h3>
+</div>
+<div class="shortcuts-item">
+<span class="shortcuts-key">E</span>
+<span class="shortcuts-label">Export Screenshot</span>
+</div>
+<div class="shortcuts-item">
+<span class="shortcuts-key">H</span>
+<span class="shortcuts-label">Toggle Timeline</span>
+</div>
+<div class="shortcuts-item">
+<span class="shortcuts-key">M</span>
+<span class="shortcuts-label">Measure Distance</span>
+</div>
+<div class="shortcuts-item">
+<span class="shortcuts-key">B</span>
+<span class="shortcuts-label">Bookmarks Panel</span>
+</div>
+<div class="shortcuts-item">
+<span class="shortcuts-key">G</span>
+<span class="shortcuts-label">Toggle Grid Overlay</span>
+</div>
+<div class="shortcuts-item">
+<span class="shortcuts-key">T</span>
+<span class="shortcuts-label">Dark/Light Theme</span>
+</div>
+<div class="shortcuts-item">
+<span class="shortcuts-key">/</span>
+<span class="shortcuts-label">Focus Search</span>
+</div>
+<div class="shortcuts-item">
+<span class="shortcuts-key">P</span>
+<span class="shortcuts-label">Drop a Pin</span>
+</div>
+<div class="shortcuts-separator"></div>
+<div class="shortcuts-category">
+<div class="shortcuts-category-header">
+<span class="shortcuts-category-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;display:inline-block;"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></span>
+<h3 class="shortcuts-category-title">Pin Tour</h3>
+</div>
+<div class="shortcuts-item">
+<span class="shortcuts-key">Space</span>
+<span class="shortcuts-label">Pause / Resume Tour</span>
+</div>
+<div class="shortcuts-item">
+<span class="shortcuts-key">←</span>
+<span class="shortcuts-label">Previous Pin</span>
+</div>
+<div class="shortcuts-item">
+<span class="shortcuts-key">→</span>
+<span class="shortcuts-label">Next Pin</span>
+</div>
+<div class="shortcuts-item">
+<span class="shortcuts-key">Esc</span>
+<span class="shortcuts-label">Stop Tour</span>
+</div>
+</div>
+<div class="shortcuts-separator"></div>
+<div class="shortcuts-category">
+<div class="shortcuts-category-header">
+<span class="shortcuts-category-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;display:inline-block;"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+<h3 class="shortcuts-category-title">Help</h3>
+</div>
+<div class="shortcuts-item">
+<span class="shortcuts-key">?</span>
+<span class="shortcuts-label">Show This Help</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+        <!-- HOW TO USE MODAL -->
+        <div id="howto-modal" class="modal-backdrop" onclick="if(event.target===this) this.classList.remove('show')">
+            <div class="modal-content" style="width:560px;" onclick="event.stopPropagation()">
+                <div class="modal-header">
+                    <h2>How to Use WorldIntelligence</h2>
+                    <button class="modal-close" onclick="document.getElementById('howto-modal').classList.remove('show')">✕</button>
+                </div>
+                <div style="padding:16px 24px 24px;display:flex;flex-direction:column;gap:14px;">
+                    <div class="howto-section">
+                        <div class="howto-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;margin-right:6px;"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21 3 6"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>Map Navigation</div>
+                        <div class="howto-text">Scroll to zoom · Click &amp; drag to pan · Click any marker to see details · Use 2D/3D buttons to switch views</div>
+                    </div>
+                    <div class="howto-section">
+                        <div class="howto-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;margin-right:6px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</div>
+                        <div class="howto-text">Use the search bar to find military bases, conflict zones, countries, airports and more. Press <span class="howto-key">/</span> to focus it instantly.</div>
+                    </div>
+                    <div class="howto-section">
+                        <div class="howto-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;margin-right:6px;"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>Intelligence Layers</div>
+                        <div class="howto-text">Toggle layers in the left sidebar — Military, Nuclear, Conflicts, Infrastructure, Earthquakes and more. Each layer has a count badge.</div>
+                    </div>
+                    <div class="howto-section">
+                        <div class="howto-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;margin-right:6px;"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg>Live News</div>
+                        <div class="howto-text">Click the <strong style="color:#ffffff">↑</strong> arrow at the bottom to open the Live News drawer. Watch 15 global news channels live.</div>
+                    </div>
+                    <div class="howto-section">
+                        <div class="howto-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;margin-right:6px;"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>Watchlist Alerts</div>
+                        <div class="howto-text">Add countries to your Watchlist in the sidebar. You'll get instant toast notifications when news or conflict events match.</div>
+                    </div>
+                    <div class="howto-section">
+                        <div class="howto-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;margin-right:6px;"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Live Ticker</div>
+                        <div class="howto-text">The scrolling bar below the top nav shows live Reuters &amp; AP headlines. Hover to pause · Click to open the article.</div>
+                    </div>
+                    <div class="howto-section">
+                        <div class="howto-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;display:inline-block;vertical-align:-2px;margin-right:6px;"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>Export</div>
+                        <div class="howto-text">Press <span class="howto-key">E</span> or use the ··· menu to export the current map view as a PNG with timestamp watermark.</div>
+                    </div>
+                    <div style="margin-top:16px;padding-top:12px;border-top:1px solid rgba(255,255,255,.06);font-family:'Inter',sans-serif;font-size:11px;color:rgba(255,255,255,.3);text-align:center;">
+                        <a href="/privacy.html" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,.5);text-decoration:none;">Privacy Policy</a>
+                        &nbsp;·&nbsp;
+                        <a href="https://x.com/WorldIntelOSINT" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,.5);text-decoration:none;">@WorldIntelOSINT</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!-- Polyfills for older browsers (must load first) -->
+<script defer src="/assets/js/polyfills.min.js"></script>
+
+<script defer src="/assets/js/data.min.js"></script>
+<script defer src="/assets/js/data-fixes.min.js"></script>
+<script defer src="/assets/js/osm.min.js"></script>
+<script defer src="/assets/js/imagery-picker.min.js"></script>
+
+<script defer src="/assets/js/2d-imagery-picker.min.js"></script>
+<script defer src="/assets/js/app.min.js"></script>
+        <div id="mob-backdrop" onclick="closeMobSide()"></div>
+
+        <script>
+            /* ═══════════════════════════════════════════════════════════════
+           RESTORE MAP POSITION FROM URL
+        ═══════════════════════════════════════════════════════════════ */
+            (function () {
+                var p = new URLSearchParams(window.location.search);
+                var lat = parseFloat(p.get("lat")),
+                    lng = parseFloat(p.get("lng")),
+                    z = parseFloat(p.get("z"));
+                var requestedView = p.get("view");
+                if (isFinite(lat) && isFinite(lng) && isFinite(z)) {
+                    window._startLat = lat;
+                    window._startLng = lng;
+                    window._startZ = z;
+                }
+                if (requestedView === "3d" || requestedView === "news") {
+                    window._startView = requestedView;
+                }
+            })();
+
+            window.addEventListener("load", function () {
+                setTimeout(function () {
+                    if (Number.isFinite(window._startLat) && Number.isFinite(window._startLng) && Number.isFinite(window._startZ) && window.map) {
+                        window.map.setView(
+                            [window._startLat, window._startLng],
+                            window._startZ,
+                            { animate: false },
+                        );
+                    }
+                    if (window._startView === "3d" && typeof window.setView === "function") {
+                        window.setView("3d");
+                    }
+                    if (window._startView === "news" && typeof window.toggleDrawer === "function" && !window._drawerOpen) {
+                        window.toggleDrawer();
+                    }
+                }, 600);
+            });
+
+            /* ═══════════════════════════════════════════════════════════════
+           SHARE
+        ═══════════════════════════════════════════════════════════════ */
+            function _buildShareUrl() {
+                var url = window.location.origin + window.location.pathname;
+                if (window.map) {
+                    var c = window.map.getCenter(),
+                        z = window.map.getZoom();
+                    url +=
+                        "?lat=" +
+                        c.lat.toFixed(4) +
+                        "&lng=" +
+                        c.lng.toFixed(4) +
+                        "&z=" +
+                        z;
+                }
+                return url;
+            }
+            function shareCurrentView(via) {
+                var url = _buildShareUrl();
+                if (via === "whatsapp") {
+                    window.open(
+                        "https://wa.me/?text=" +
+                            encodeURIComponent("WorldIntelligence OSINT Map – " + url),
+                        "_blank",
+                    );
+                    return;
+                }
+                if (via === "telegram") {
+                    window.open(
+                        "https://t.me/share/url?url=" +
+                            encodeURIComponent(url) +
+                            "&text=" +
+                            encodeURIComponent(
+                                "WorldIntelligence – Global Intelligence Map",
+                            ),
+                        "_blank",
+                    );
+                    return;
+                }
+                try {
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(url).then(showShareToast);
+                    } else {
+                        var ta = document.createElement("textarea");
+                        ta.value = url;
+                        ta.style.position = "fixed";
+                        ta.style.opacity = "0";
+                        document.body.appendChild(ta);
+                        ta.select();
+                        document.execCommand("copy");
+                        document.body.removeChild(ta);
+                        showShareToast();
+                    }
+                } catch (e) {
+                    showShareToast();
+                }
+            }
+            function shareToX() {
+                var url = _buildShareUrl();
+                window.open(
+                    "https://x.com/intent/tweet?text=" +
+                        encodeURIComponent(
+                            "Tracking global intel in real-time 🌍\n" +
+                                url +
+                                "\n\nvia @WorldIntelOSINT",
+                        ),
+                    "_blank",
+                );
+            }
+            function showShareToast() {
+                var t = document.getElementById("share-toast");
+                if (!t) return;
+                t.textContent = "✓ Link copied to clipboard";
+                t.classList.add("show");
+                setTimeout(function () {
+                    t.classList.remove("show");
+                }, 2800);
+            }
+
+            /* ═══════════════════════════════════════════════════════════════
+           BOTTOM DRAWER
+        ═══════════════════════════════════════════════════════════════ */
+            var _drawerOpen = false;
+            var _drawerTab = "Live News";
+
+            function openIntelFeedWindow() {
+                window.open("/intel-feed.html", "_blank");
+            }
+
+            function toggleDrawer() {
+                _drawerOpen = !_drawerOpen;
+                document.body.classList.toggle("drawer-open", _drawerOpen);
+                var d = document.getElementById("bottom-drawer");
+                if (d) d.style.height = "";
+                if (_drawerOpen) {
+                    initNewsDrawer();
+                } else {
+                    var player = document.getElementById('news-player');
+                    if(player) player.src = 'about:blank';
+                }
+                setTimeout(function() {
+                    if (window.map && typeof window.map.invalidateSize === 'function') {
+                        window.map.invalidateSize(true);
+                    }
+                }, 50);
+                setTimeout(function() {
+                    if (window.map && typeof window.map.invalidateSize === 'function') {
+                        window.map.invalidateSize(true);
+                    }
+                }, 350);
+            }
+
+            function switchDrawerTab(name, btn) {
+                // Only Live News pane exists — always show it
+                _drawerTab = 'Live News';
+                var pane = document.getElementById('drawer-pane-news');
+                if (pane) pane.classList.add('active');
+                initNewsDrawer();
+            }
+
+            /* ═══════════════════════════════════════════════════════════════
+           LIVE NEWS / YOUTUBE
+        ═══════════════════════════════════════════════════════════════ */
+            function renderDrawerTabs() {
+                // Drawer tabs removed — only Live News remains. No-op.
+            }
+
+            // Settings functions — stubs kept for compatibility (settings modal removed)
+            function toggleSettingsModal() { /* settings modal removed */ }
+            function switchSettingsTab() { /* settings modal removed */ }
+            function renderPanelsList() { /* settings modal removed */ }
+            function togglePanelSetting() { /* settings modal removed */ }
+            function renderSourcesList() { /* settings modal removed */ }
+            function loadThemeSettings() { /* settings modal removed */ }
+            function updateSetting(key, val) {
+                window.SETTINGS[key] = val;
+                window.saveSettings();
+                if (key === 'fontFamily') {
+                    document.body.style.fontFamily = val === 'monospace' ? 'JetBrains Mono, monospace' : 'Inter, sans-serif';
+                }
+            }
+
+            function initNewsDrawer() {
+                var container = document.getElementById('news-channels');
+                if (!container || !window.NEWS_CHANNELS) return;
+                
+                // Always re-render to ensure thumbnails show
+                var html = '';
+                window.NEWS_CHANNELS.forEach(function(c) {
+                    var isActive = window._currentChannel.id === c.id;
+                    html += '<div class="chan-card' + (isActive ? ' active' : '') + '" data-id="' + c.id + '" onclick="loadChannel(\'' + c.id + '\')">' +
+                            '<div class="chan-thumbnail">' +
+                            '<img src="https://img.youtube.com/vi/' + c.yt + '/mqdefault.jpg" alt="' + c.name + '" loading="lazy">' +
+                            '</div>' +
+                            '<div class="chan-name-overlay">' +
+                            '<div class="chan-name">' + c.name + '</div>' +
+                            '<div class="chan-live-badge">LIVE</div>' +
+                            '</div>' +
+                            '</div>';
+                });
+                container.innerHTML = html;
+                
+                var player = document.getElementById('news-player');
+                // Always load — browser normalizes '' to page URL so !player.src is unreliable
+                // Also reload if src is about:blank (cleared on drawer close)
+                if (player) {
+                    var src = player.src || '';
+                    if (!src || src === 'about:blank' || src.indexOf('youtube.com') === -1) {
+                        loadChannel(window._currentChannel.id);
+                    }
+                }
+            }
+
+            function initConflictZones() {
+                var container = document.getElementById('conflict-grid');
+                if (!container) return;
+                var conflicts = [
+                    { name: 'Ukraine — Russia', region: 'Eastern Europe', level: 'CRITICAL', color: '#ef4444', incidents: '847', updated: '2h ago' },
+                    { name: 'Israel — Gaza', region: 'Middle East', level: 'CRITICAL', color: '#ef4444', incidents: '1,204', updated: '1h ago' },
+                    { name: 'Sudan', region: 'North Africa', level: 'HIGH', color: '#f0f0f0', incidents: '312', updated: '3h ago' },
+                    { name: 'Myanmar', region: 'Southeast Asia', level: 'HIGH', color: '#f0f0f0', incidents: '189', updated: '5h ago' },
+                    { name: 'Yemen', region: 'Middle East', level: 'CRITICAL', color: '#ef4444', incidents: '521', updated: '4h ago' },
+                    { name: 'Syria', region: 'Middle East', level: 'MODERATE', color: '#f0f0f0', incidents: '94', updated: '6h ago' },
+                    { name: 'DR Congo', region: 'Central Africa', level: 'HIGH', color: '#f0f0f0', incidents: '276', updated: '7h ago' },
+                    { name: 'Somalia', region: 'East Africa', level: 'MODERATE', color: '#f0f0f0', incidents: '63', updated: '8h ago' }
+                ];
+                var html = '<div style="display:flex;flex-direction:column;gap:6px;padding:16px 20px;height:100%;overflow-y:auto;">';
+                html += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">';
+                html += '<span style="font-family:Inter,sans-serif;font-size:16px;font-weight:800;color:#fff;letter-spacing:-0.4px;">Active Conflict Zones</span>';
+                html += '<span style="flex:1"></span>';
+                html += '<span style="display:flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.28);font-family:Inter,sans-serif;font-size:9px;font-weight:700;color:#ef4444;letter-spacing:1.5px;">';
+                html += '<span style="width:5px;height:5px;border-radius:50%;background:#ef4444;box-shadow:0 0 5px #ef4444;display:inline-block;"></span>8 ACTIVE</span></div>';
+                html += '<div style="display:flex;gap:8px;">';
+                conflicts.forEach(function(c) {
+                    var isCrit = c.level === 'CRITICAL';
+                    var bg = isCrit ? 'linear-gradient(180deg,#1a0a0a 0%,#0d0808 100%)' : 'linear-gradient(180deg,#141008 0%,#0d0c08 100%)';
+                    var border = isCrit ? 'rgba(239,68,68,0.3)' : 'rgba(251,191,36,0.28)';
+                    html += '<div style="flex:1;min-width:0;padding:14px 16px;border-radius:12px;background:' + bg + ';border:1px solid ' + border + ';display:flex;flex-direction:column;gap:8px;">';
+                    html += '<div style="display:flex;align-items:center;gap:7px;">';
+                    html += '<span style="width:8px;height:8px;border-radius:50%;background:' + c.color + ';box-shadow:0 0 8px ' + c.color + ';flex-shrink:0;display:inline-block;"></span>';
+                    html += '<span style="font-family:Inter,sans-serif;font-size:13px;font-weight:700;color:#fff;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + c.name + '</span>';
+                    html += '<span style="padding:2px 7px;border-radius:4px;background:' + c.color + '20;border:1px solid ' + c.color + '40;font-family:Inter,sans-serif;font-size:8px;font-weight:700;color:' + c.color + ';letter-spacing:1px;">' + c.level + '</span>';
+                    html += '</div>';
+                    html += '<div style="font-family:Inter,sans-serif;font-size:11px;color:#4e5d73;">' + c.region + '</div>';
+                    html += '<div style="font-family:\'JetBrains Mono\',monospace;font-size:9px;color:#3a4a5e;">Updated ' + c.updated + ' · ' + c.incidents + ' incidents</div>';
+                    html += '</div>';
+                });
+                html += '</div></div>';
+                container.innerHTML = html;
+            }
+
+            function initMarketAnalysis() {
+                var container = document.getElementById('market-grid');
+                if (!container) return;
+                var markets = [
+                    { name: 'S&P 500', value: '5,847.23', change: '+2.4%', up: true, high: '5,851', low: '5,802', color: '#ffffff', border: '#22c55e' },
+                    { name: 'NASDAQ', value: '18,972.42', change: '-0.8%', up: false, high: '19,024', low: '18,945', color: '#ef4444', border: '#ef4444' },
+                    { name: 'Gold (XAU/USD)', value: '$2,687.50', change: '+1.2%', up: true, high: '$2,692', low: '$2,675', color: '#ffffff', border: '#ffffff' },
+                    { name: 'Crude Oil (WTI)', value: '$87.42', change: '+0.5%', up: true, high: '$88.12', low: '$86.85', color: '#fb923c', border: '#fb923c' },
+                    { name: 'EUR/USD', value: '1.0842', change: '-0.3%', up: false, high: '1.0856', low: '1.0831', color: '#60a5fa', border: '#60a5fa' },
+                    { name: 'BTC/USD', value: '$98,742', change: '+3.7%', up: true, high: '$99,100', low: '$96,200', color: '#ffffff', border: '#ffffff' }
+                ];
+                var html = '<div style="display:flex;flex-direction:column;gap:6px;padding:16px 20px;height:100%;overflow-y:auto;">';
+                html += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">';
+                html += '<span style="font-family:Inter,sans-serif;font-size:16px;font-weight:800;color:#fff;letter-spacing:-0.4px;">Market Analysis</span>';
+                html += '<span style="flex:1"></span>';
+                html += '<span style="display:flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.28);font-family:Inter,sans-serif;font-size:9px;font-weight:700;color:#ffffff;letter-spacing:1.5px;">';
+                html += '<span style="width:5px;height:5px;border-radius:50%;background:#ffffff;box-shadow:0 0 5px #ffffff;display:inline-block;"></span>LIVE DATA</span></div>';
+                html += '<div style="display:flex;gap:8px;">';
+                markets.forEach(function(m) {
+                    var cc = m.up ? '#22c55e' : '#ef4444';
+                    html += '<div style="flex:1;min-width:0;padding:14px 16px;border-radius:12px;background:linear-gradient(180deg,#111827 0%,#0d1117 100%);border:1px solid ' + m.border + '28;display:flex;flex-direction:column;gap:7px;box-shadow:0 4px 20px ' + m.border + '0a;">';
+                    html += '<div style="display:flex;align-items:center;gap:6px;">';
+                    html += '<span style="font-family:Inter,sans-serif;font-size:12px;font-weight:700;color:#fff;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + m.name + '</span>';
+                    html += '<span style="padding:2px 7px;border-radius:5px;background:' + cc + '18;font-family:Inter,sans-serif;font-size:10px;font-weight:700;color:' + cc + ';">' + (m.up ? '↑' : '↓') + ' ' + m.change.replace('+','').replace('-','') + '</span>';
+                    html += '</div>';
+                    html += '<div style="font-family:Inter,sans-serif;font-size:24px;font-weight:800;color:' + m.color + ';letter-spacing:-0.8px;line-height:1;">' + m.value + '</div>';
+                    html += '<div style="display:flex;gap:10px;">';
+                    html += '<span style="font-family:\'JetBrains Mono\',monospace;font-size:9px;font-weight:600;color:#22c55e;">H: ' + m.high + '</span>';
+                    html += '<span style="font-family:\'JetBrains Mono\',monospace;font-size:9px;font-weight:600;color:#ef4444;">L: ' + m.low + '</span>';
+                    html += '</div></div>';
+                });
+                html += '</div></div>';
+                container.innerHTML = html;
+            }
+
+            function initCryptoNews() {
+                var container = document.getElementById('crypto-grid');
+                if (!container) return;
+                var cryptos = [
+                    { name: 'Bitcoin (BTC)', value: '$98,742', change: '+3.7%', up: true, vol: '$42.8B', mcap: '$1.95T', color: '#ffffff', border: '#ffffff' },
+                    { name: 'Ethereum (ETH)', value: '$3,847', change: '+5.2%', up: true, vol: '$28.4B', mcap: '$462B', color: '#627eea', border: '#627eea' },
+                    { name: 'Solana (SOL)', value: '$247.82', change: '-1.4%', up: false, vol: '$8.2B', mcap: '$118B', color: '#14f195', border: '#14f195' },
+                    { name: 'XRP', value: '$2.47', change: '+8.3%', up: true, vol: '$12.5B', mcap: '$142B', color: '#60a5fa', border: '#60a5fa' },
+                    { name: 'Cardano (ADA)', value: '$1.08', change: '+2.1%', up: true, vol: '$3.8B', mcap: '$38B', color: '#a78bfa', border: '#a78bfa' },
+                    { name: 'BNB', value: '$612.40', change: '+1.9%', up: true, vol: '$2.1B', mcap: '$89B', color: '#ffffff', border: '#ffffff' },
+                    { name: 'Dogecoin (DOGE)', value: '$0.4218', change: '+4.5%', up: true, vol: '$5.6B', mcap: '$62B', color: '#f0f0f0', border: '#f0f0f0' },
+                    { name: 'Avalanche (AVAX)', value: '$38.74', change: '-2.8%', up: false, vol: '$1.2B', mcap: '$16B', color: '#ef4444', border: '#ef4444' },
+                    { name: 'Chainlink (LINK)', value: '$18.92', change: '+6.1%', up: true, vol: '$0.9B', mcap: '$11B', color: '#60a5fa', border: '#60a5fa' },
+                    { name: 'Polkadot (DOT)', value: '$9.14', change: '+3.3%', up: true, vol: '$0.7B', mcap: '$12B', color: '#e6007a', border: '#e6007a' }
+                ];
+                var html = '<div style="display:flex;flex-direction:column;gap:10px;padding:16px 20px;height:100%;overflow-y:auto;">';
+                html += '<div style="display:flex;align-items:center;gap:10px;">';
+                html += '<span style="font-family:Inter,sans-serif;font-size:16px;font-weight:800;color:#fff;letter-spacing:-0.4px;">Crypto Market & News</span>';
+                html += '<span style="flex:1"></span>';
+                html += '<span style="display:flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.28);font-family:Inter,sans-serif;font-size:9px;font-weight:700;color:#22c55e;letter-spacing:1.5px;">';
+                html += '<span style="width:5px;height:5px;border-radius:50%;background:#22c55e;box-shadow:0 0 5px #22c55e;display:inline-block;"></span>LIVE PRICES</span></div>';
+                // Row 1
+                html += '<div style="display:flex;gap:8px;">';
+                cryptos.slice(0,5).forEach(function(c) {
+                    var cc = c.up ? '#22c55e' : '#ef4444';
+                    html += '<div style="flex:1;min-width:0;padding:14px 16px;border-radius:12px;background:linear-gradient(180deg,#111827 0%,#0d1117 100%);border:1px solid ' + c.border + '28;display:flex;flex-direction:column;gap:7px;box-shadow:0 4px 20px ' + c.border + '0a;">';
+                    html += '<div style="display:flex;align-items:center;gap:6px;">';
+                    html += '<span style="font-family:Inter,sans-serif;font-size:12px;font-weight:700;color:#fff;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + c.name + '</span>';
+                    html += '<span style="padding:2px 7px;border-radius:5px;background:' + cc + '18;font-family:Inter,sans-serif;font-size:10px;font-weight:700;color:' + cc + ';">' + (c.up ? '↑' : '↓') + ' ' + c.change.replace('+','').replace('-','') + '</span>';
+                    html += '</div>';
+                    html += '<div style="font-family:Inter,sans-serif;font-size:24px;font-weight:800;color:' + c.color + ';letter-spacing:-0.8px;line-height:1;">' + c.value + '</div>';
+                    html += '<div style="display:flex;gap:10px;">';
+                    html += '<span style="font-family:\'JetBrains Mono\',monospace;font-size:9px;font-weight:600;color:#3a4a5e;">VOL ' + c.vol + '</span>';
+                    html += '<span style="font-family:\'JetBrains Mono\',monospace;font-size:9px;font-weight:600;color:#3a4a5e;">MCAP ' + c.mcap + '</span>';
+                    html += '</div></div>';
+                });
+                html += '</div>';
+                // Row 2
+                html += '<div style="display:flex;gap:8px;">';
+                cryptos.slice(5,10).forEach(function(c) {
+                    var cc = c.up ? '#22c55e' : '#ef4444';
+                    html += '<div style="flex:1;min-width:0;padding:14px 16px;border-radius:12px;background:linear-gradient(180deg,#111827 0%,#0d1117 100%);border:1px solid ' + c.border + '28;display:flex;flex-direction:column;gap:7px;box-shadow:0 4px 20px ' + c.border + '0a;">';
+                    html += '<div style="display:flex;align-items:center;gap:6px;">';
+                    html += '<span style="font-family:Inter,sans-serif;font-size:12px;font-weight:700;color:#fff;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + c.name + '</span>';
+                    html += '<span style="padding:2px 7px;border-radius:5px;background:' + cc + '18;font-family:Inter,sans-serif;font-size:10px;font-weight:700;color:' + cc + ';">' + (c.up ? '↑' : '↓') + ' ' + c.change.replace('+','').replace('-','') + '</span>';
+                    html += '</div>';
+                    html += '<div style="font-family:Inter,sans-serif;font-size:24px;font-weight:800;color:' + c.color + ';letter-spacing:-0.8px;line-height:1;">' + c.value + '</div>';
+                    html += '<div style="display:flex;gap:10px;">';
+                    html += '<span style="font-family:\'JetBrains Mono\',monospace;font-size:9px;font-weight:600;color:#3a4a5e;">VOL ' + c.vol + '</span>';
+                    html += '<span style="font-family:\'JetBrains Mono\',monospace;font-size:9px;font-weight:600;color:#3a4a5e;">MCAP ' + c.mcap + '</span>';
+                    html += '</div></div>';
+                });
+                html += '</div></div>';
+                container.innerHTML = html;
+            }
+
+            function initIntelFeed() {
+                var container = document.getElementById('drawer-pane-intel');
+                if (!container) return;
+                var items = [
+                    { cat: 'MILITARY', catColor: '#ef4444', time: '4m ago', title: 'NATO activates rapid response units along eastern flank amid escalating tensions', src: 'Reuters', srcTag: 'Breaking' },
+                    { cat: 'ECONOMIC', catColor: '#ffffff', time: '12m ago', title: 'Fed signals potential rate pause as inflation data shows unexpected cooling', src: 'Bloomberg', srcTag: 'Developing' },
+                    { cat: 'CYBER', catColor: '#60a5fa', time: '28m ago', title: 'Critical infrastructure cyberattack targets European energy grid operators', src: 'AP', srcTag: 'Verified' },
+                    { cat: 'NUCLEAR', catColor: '#a78bfa', time: '1h ago', title: 'IAEA inspectors denied access to Zaporizhzhia plant for third consecutive week', src: 'Al Jazeera', srcTag: 'Confirmed' },
+                    { cat: 'GEOPOLITICAL', catColor: '#fb923c', time: '1h ago', title: 'China conducts largest naval exercise in South China Sea in five years', src: 'Reuters', srcTag: 'Breaking' },
+                    { cat: 'INTELLIGENCE', catColor: '#22c55e', time: '2h ago', title: 'Five Eyes alliance issues joint advisory on state-sponsored espionage campaigns', src: 'FT', srcTag: 'Exclusive' },
+                    { cat: 'CONFLICT', catColor: '#ef4444', time: '2h ago', title: 'Ceasefire negotiations collapse as both sides resume heavy artillery exchanges', src: 'BBC', srcTag: 'Live' },
+                    { cat: 'ENERGY', catColor: '#ffffff', time: '3h ago', title: 'OPEC+ emergency meeting called as oil prices surge past $90 threshold', src: 'Bloomberg', srcTag: 'Alert' }
+                ];
+                var html = '<div style="display:flex;flex-direction:column;gap:10px;padding:16px 20px;height:100%;overflow-y:auto;">';
+                html += '<div style="display:flex;align-items:center;gap:10px;">';
+                html += '<span style="font-family:Inter,sans-serif;font-size:16px;font-weight:800;color:#fff;letter-spacing:-0.4px;">Intel Feed</span>';
+                html += '<span style="flex:1"></span>';
+                html += '<span style="display:flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.28);font-family:Inter,sans-serif;font-size:9px;font-weight:700;color:#ffffff;letter-spacing:1.5px;">';
+                html += '<span style="width:5px;height:5px;border-radius:50%;background:#ffffff;box-shadow:0 0 5px #ffffff;display:inline-block;"></span>LIVE INTEL</span></div>';
+                html += '<div style="display:flex;gap:8px;">';
+                items.forEach(function(item) {
+                    html += '<div style="flex:1;min-width:0;padding:14px 16px;border-radius:12px;background:linear-gradient(180deg,#0f1420 0%,#0a0d18 100%);border:1px solid rgba(255,255,255,0.14);display:flex;flex-direction:column;gap:8px;">';
+                    html += '<div style="display:flex;align-items:center;gap:7px;">';
+                    html += '<span style="padding:2px 8px;border-radius:4px;background:' + item.catColor + '18;border:1px solid ' + item.catColor + '30;font-family:Inter,sans-serif;font-size:8px;font-weight:700;color:' + item.catColor + ';letter-spacing:1px;">' + item.cat + '</span>';
+                    html += '<span style="flex:1"></span>';
+                    html += '<span style="font-family:\'JetBrains Mono\',monospace;font-size:9px;color:#3a4a5e;">' + item.time + '</span>';
+                    html += '</div>';
+                    html += '<div style="font-family:Inter,sans-serif;font-size:12px;font-weight:600;color:#e8edf5;line-height:1.5;letter-spacing:-0.1px;">' + item.title + '</div>';
+                    html += '<div style="font-family:Inter,sans-serif;font-size:10px;color:#4e5d73;">' + item.src + ' · <span style="color:#3a4a5e;">' + item.srcTag + '</span></div>';
+                    html += '</div>';
+                });
+                html += '</div></div>';
+                container.innerHTML = html;
+            }
+
+            function drawerRefreshNews() {
+                var player = document.getElementById('news-player');
+                if(player) {
+                    var src = player.src;
+                    // Only refresh if actually playing YouTube (not about:blank or page URL)
+                    if (src && src.indexOf('youtube.com') !== -1) {
+                        player.src = 'about:blank';
+                        setTimeout(function(){ player.src = src; }, 150);
+                    } else {
+                        // Not loaded yet — trigger fresh load
+                        loadChannel(window._currentChannel.id);
+                    }
+                }
+            }
+            function setDrawerFeed(cat, btn) {
+                /* Filter logic if needed, currently All/Military/War just different channel sets */
+                document.querySelectorAll(".drawer-filter-btn").forEach(function (b) { b.classList.remove("active"); });
+                if (btn) btn.classList.add("active");
+            }
+
+            /* ═══════════════════════════════════════════════════════════════
+               KEYBOARD SHORTCUTS
+            ═══════════════════════════════════════════════════════════════ */
+            (function() {
+                // Escape priority chain
+                function handleEscape() {
+                    var cp = document.getElementById('country-panel');
+                    if (cp && cp.classList.contains('open')) { cp.classList.remove('open'); return; }
+                    var det = document.getElementById('det');
+                    if (det && det.classList.contains('show')) { closeDet(); return; }
+                    if (document.body.classList.contains('drawer-open')) { toggleDrawer(); return; }
+                    var sm = document.getElementById('shortcuts-modal');
+                    if (sm && sm.classList.contains('show')) { sm.classList.remove('show'); return; }
+                }
+
+                function focusSearch() {
+                    var grp = document.getElementById('gsearch-group');
+                    var inp = document.getElementById('gsearch-inp');
+                    if (grp) grp.classList.remove('hidden');
+                    if (inp) { inp.focus(); inp.select(); }
+                    var tog = document.getElementById('gsearch-tog-desk');
+                    if (tog) tog.classList.add('active');
+                }
+
+                function showShortcutsModal() {
+                    var m = document.getElementById('shortcuts-modal');
+                    if (m) m.classList.toggle('show');
+                }
+
+                document.addEventListener('keydown', function(e) {
+                    var tag = document.activeElement && document.activeElement.tagName;
+                    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+                    if (document.activeElement && document.activeElement.isContentEditable) return;
+                    if (e.ctrlKey || e.metaKey || e.altKey) return;
+
+                    switch (e.key) {
+                        case 's': case 'S': toggleSide(); break;
+                        case 'l': case 'L': toggleDrawer(); break;
+                        case 'Escape': handleEscape(); break;
+                        case 'e': case 'E':
+                            if (window.SCREENSHOT) window.SCREENSHOT.capture();
+                            break;
+                        case 'h': case 'H':
+                            if (window.TIMELINE) window.TIMELINE.toggle();
+                            break;
+                        case 'm': case 'M':
+                            if(window.WI_FEATURES){var mb=document.getElementById('wi-btn-measure');if(mb)mb.click();}
+                            break;
+                        case 'b': case 'B':
+                            if(window.WI_FEATURES){window.WI_FEATURES.BookmarksPanel.toggle()}
+                            break;
+                        case 'g': case 'G':
+                            if(window.WI_FEATURES){var gb=document.getElementById('wi-btn-grid');if(gb)gb.click();}
+                            break;
+                        case 'f': case 'F':
+                            if(window.WI_FEATURES) window.WI_FEATURES.FullScreen.toggle();
+                            break;
+                        case 't': case 'T':
+                            if(window.WI_FEATURES) window.WI_FEATURES.ThemeSwitcher.toggle();
+                            break;
+                        case '/':
+                            e.preventDefault();
+                            focusSearch();
+                            break;
+                        case '?':
+                            showShortcutsModal();
+                            break;
+                    }
+                });
+
+                window._showShortcutsModal = showShortcutsModal;
+
+                // Close tools dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    var wrap = document.getElementById('tools-menu-wrap');
+                    if (wrap && !wrap.contains(e.target)) {
+                        var dd = document.getElementById('tools-dropdown');
+                        if (dd) dd.classList.remove('open');
+                    }
+                    var wrapD = document.getElementById('tools-menu-wrap-desk');
+                    if (wrapD && !wrapD.contains(e.target)) {
+                        var ddD = document.getElementById('tools-dropdown-desk');
+                        if (ddD) ddD.classList.remove('open');
+                    }
+                });
+            })();
+
+            /* ═══════════════════════════════════════════════════════════════
+               DRAWER DRAG-TO-RESIZE
+            ═══════════════════════════════════════════════════════════════ */
+            (function () {
+                var drawer, strip;
+                var _dragActive = false;
+                var _startY = 0;
+                var _startH = 0;
+                var MIN_H = 180;
+                var CLOSE_THRESHOLD = 130; /* drag below this → close */
+
+                function getMaxH() {
+                    return Math.floor(window.innerHeight * 0.88);
+                }
+
+                function startDrag(clientY) {
+                    if (!_drawerOpen) return;
+                    drawer = document.getElementById("bottom-drawer");
+                    strip = document.getElementById("drawer-topstrip");
+                    if (!drawer) return;
+                    _dragActive = true;
+                    _startY = clientY;
+                    _startH = drawer.offsetHeight;
+                    drawer.classList.add("is-dragging");
+                    if (strip) strip.classList.add("dragging");
+                    /* Disable map interaction while dragging */
+                    if (window.map) window.map.dragging.disable();
+                }
+
+                function moveDrag(clientY) {
+                    if (!_dragActive || !drawer) return;
+                    var dy = _startY - clientY; /* positive = dragging up */
+                    var newH = Math.min(
+                        Math.max(_startH + dy, MIN_H),
+                        getMaxH(),
+                    );
+                    drawer.style.height = newH + "px";
+                }
+
+                function endDrag(clientY) {
+                    if (!_dragActive) return;
+                    _dragActive = false;
+                    if (drawer) drawer.classList.remove("is-dragging");
+                    if (strip) strip.classList.remove("dragging");
+                    /* Re-enable map */
+                    if (window.map) window.map.dragging.enable();
+                    /* If dragged too far down → close */
+                    if (drawer) {
+                        var h = drawer.offsetHeight;
+                        if (h < CLOSE_THRESHOLD) {
+                            drawer.style.height =
+                                ""; /* reset before close anim */
+                            toggleDrawer();
+                        }
+                    }
+                    drawer = null;
+                    strip = null;
+                }
+
+                /* ── Mouse events ── */
+                function onMouseDown(e) {
+                    startDrag(e.clientY);
+                    e.preventDefault();
+                }
+                function onMouseMove(e) {
+                    moveDrag(e.clientY);
+                }
+                function onMouseUp(e) {
+                    endDrag(e.clientY);
+                }
+
+                /* ── Touch events ── */
+                function onTouchStart(e) {
+                    if (e.target.closest('#drawer-topstrip')) {
+                        startDrag(e.touches[0].clientY);
+                    }
+                }
+                function onTouchMove(e) {
+                    if (_dragActive) {
+                        if (e.cancelable) e.preventDefault();
+                        moveDrag(e.touches[0].clientY);
+                    }
+                }
+                function onTouchEnd(e) { endDrag(); }
+
+                document.addEventListener("mousemove", onMouseMove);
+                document.addEventListener("mouseup", onMouseUp);
+                document.addEventListener("touchmove", onTouchMove, {
+                    passive: false,
+                });
+                document.addEventListener("touchend", onTouchEnd);
+
+                /* Attach mousedown/touchstart to the topstrip after DOM ready */
+                window.addEventListener("load", function () {
+                    var ts = document.getElementById("drawer-topstrip");
+                    if (ts) {
+                        ts.addEventListener("mousedown", onMouseDown);
+ts.addEventListener("touchstart", onTouchStart, {
+              passive: true,
+            });
+          }
+        });
+      })();
+
+/* ═══════════════════════════════════════════════════════════════
+SIDEBAR / LEGEND / SEARCH: auto-hidden via body.drawer-open CSS.
+toggleDrawer() handles everything — no extra JS needed.
+═══════════════════════════════════════════════════════════════ */
+
+// NOTE: Imagery picker code moved to assets/js/imagery-picker.js
+</script>
+<script defer src="/assets/js/data-sync.min.js"></script>
+<script defer src="/assets/js/google-auth.min.js"></script>
+<script defer src="/assets/js/features.min.js"></script>
+<script defer src="/assets/js/street-view.min.js"></script>
+<script defer src="/assets/js/pegman.min.js"></script>
+<script defer src="/assets/js/historical-imagery.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+{
+  "name": "WorldIntelligence \u2014 Open-Source Intelligence, Mapped",
+  "short_name": "WorldIntelligence",
+  "description": "23 verified open-source datasets in one free, queryable map.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#050505",
+  "orientation": "any",
+  "scope": "/",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": [
+    "news",
+    "utilities",
+    "navigation",
+    "education"
+  ],
+  "icons": [
+    {
+      "src": "/assets/img/logo-light.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "shortcuts": [
+    {
+      "name": "Live News",
+      "short_name": "News",
+      "description": "Open live news feed",
+      "url": "/intel-feed.html",
+      "icons": [
+        {
+          "src": "/assets/img/logo.png",
+          "sizes": "512x512"
+        }
+      ]
+    },
+    {
+      "name": "3D Globe",
+      "short_name": "Globe",
+      "description": "View 3D globe",
+      "url": "/?view=3d",
+      "icons": [
+        {
+          "src": "/assets/img/logo.png",
+          "sizes": "512x512"
+        }
+      ]
+    }
+  ],
+  "share_target": {
+    "action": "/",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
+}

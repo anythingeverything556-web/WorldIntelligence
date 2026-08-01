@@ -1,0 +1,107 @@
+{
+  "source": "https://www.geoboundaries.org/api/current/gbOpen/ALL/ADM0/",
+  "generatedAt": "2026-04-08T10:40:43.181Z",
+  "totalSourceFeatures": 212,
+  "regions": [
+    {
+      "id": "mena",
+      "name": "Mid East",
+      "featureCount": 34
+    },
+    {
+      "id": "eas",
+      "name": "E Asia",
+      "featureCount": 14
+    },
+    {
+      "id": "weu1",
+      "name": "W Eur W",
+      "featureCount": 17
+    },
+    {
+      "id": "weu2a",
+      "name": "W Eur N",
+      "featureCount": 9
+    },
+    {
+      "id": "weu2b1",
+      "name": "W Eur MW",
+      "featureCount": 13
+    },
+    {
+      "id": "weu2b2",
+      "name": "W Eur ME",
+      "featureCount": 16
+    },
+    {
+      "id": "weu2c",
+      "name": "W Eur S",
+      "featureCount": 12
+    },
+    {
+      "id": "ceu",
+      "name": "C Europe",
+      "featureCount": 30
+    },
+    {
+      "id": "sas",
+      "name": "S Asia",
+      "featureCount": 18
+    },
+    {
+      "id": "sea",
+      "name": "SE Asia",
+      "featureCount": 23
+    },
+    {
+      "id": "rus1",
+      "name": "W Russia",
+      "featureCount": 12
+    },
+    {
+      "id": "rus2",
+      "name": "E Russia",
+      "featureCount": 6
+    },
+    {
+      "id": "nam1",
+      "name": "N America W",
+      "featureCount": 4
+    },
+    {
+      "id": "nam2",
+      "name": "N America E",
+      "featureCount": 6
+    },
+    {
+      "id": "nam3",
+      "name": "C America",
+      "featureCount": 47
+    },
+    {
+      "id": "waf",
+      "name": "W Africa",
+      "featureCount": 47
+    },
+    {
+      "id": "eaf",
+      "name": "E Africa",
+      "featureCount": 45
+    },
+    {
+      "id": "sam",
+      "name": "S America",
+      "featureCount": 28
+    },
+    {
+      "id": "oce1",
+      "name": "Oceania W",
+      "featureCount": 8
+    },
+    {
+      "id": "oce2",
+      "name": "Oceania E",
+      "featureCount": 11
+    }
+  ]
+}

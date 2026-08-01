@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Outfit:wght@200;300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #050505;
+  color: #ffffff;
+  font-family: "Outfit", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.font-display {
+  font-family: "Unbounded", system-ui, sans-serif;
+}
+
+.font-body {
+  font-family: "Outfit", system-ui, sans-serif;
+}
+
+/* Smooth image-scale on hover (Pencil "hover-scale" group triggers this) */
+.hover-scale {
+  transition: transform 600ms ease-out;
+}
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* Custom scrollbar so it doesn't recolor to bright white on the dark page */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+::-webkit-scrollbar-thumb {
+  background: #222;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #333;
+}
