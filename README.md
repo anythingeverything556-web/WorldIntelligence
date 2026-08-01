@@ -1,9 +1,31 @@
+<div align="center">
+
 # WorldIntelligence
 
-Real-time open-source intelligence (OSINT) platform. Interactive 2D/3D globe tracking military bases, conflict zones, nuclear facilities, critical infrastructure, naval assets, and breaking news — all in one command center.
+**Real-time open-source intelligence (OSINT) platform.**
+Interactive 2D/3D globe tracking military bases, conflict zones, nuclear facilities,
+critical infrastructure, naval assets, and breaking news — all in one command center.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/anythingeverything556-web/WorldIntelligence)
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/new/template?repository-url=https://github.com/anythingeverything556-web/WorldIntelligence)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/anythingeverything556-web/WorldIntelligence)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org)
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Cesium](https://img.shields.io/badge/Cesium-1.140-6CADDF?logo=cesium&logoColor=white)](https://cesium.com)
+[![Leaflet](https://img.shields.io/badge/Leaflet-1.9-199900?logo=leaflet&logoColor=white)](https://leafletjs.com)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/anythingeverything556-web/WorldIntelligence/pulls)
+
+[![GitHub stars](https://img.shields.io/github/stars/anythingeverything556-web/WorldIntelligence?style=social)](https://github.com/anythingeverything556-web/WorldIntelligence/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/anythingeverything556-web/WorldIntelligence?style=social)](https://github.com/anythingeverything556-web/WorldIntelligence/network/members)
+[![GitHub watchers](https://img.shields.io/github/watchers/anythingeverything556-web/WorldIntelligence?style=social)](https://github.com/anythingeverything556-web/WorldIntelligence/watchers)
+
+**[Live Demo](https://worldintelligence.vercel.app)** · **[Report Bug](https://github.com/anythingeverything556-web/WorldIntelligence/issues)** · **[Request Feature](https://github.com/anythingeverything556-web/WorldIntelligence/issues)**
+
+</div>
 
 ---
 
@@ -82,9 +104,18 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ---
 
-## Deploy to Vercel
+## Deploy
 
-Click the button at the top of this README, or:
+One-click deploy to your preferred platform. Set your environment variables in the platform dashboard after deploy.
+
+| Platform | Deploy | Notes |
+|----------|--------|-------|
+| **Vercel** | [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/anythingeverything556-web/WorldIntelligence) | Recommended. Native Next.js support. Free tier generous. |
+| **Railway** | [![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/new/template?repository-url=https://github.com/anythingeverything556-web/WorldIntelligence) | Good alternative. Free $5 credit/month. |
+| **Render** | [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/anythingeverything556-web/WorldIntelligence) | Free tier with auto-sleep. Reads `render.yaml` automatically. |
+| **Self-hosted** | [Caddy](Caddyfile) | `caddy run` — reverse proxies to `localhost:3000`. |
+
+### Manual Deploy (Vercel)
 
 1. Push this repo to your GitHub account
 2. Go to [vercel.com/new](https://vercel.com/new) and import the repo
@@ -205,6 +236,8 @@ The project uses a **thin-wrapper pattern** — Next.js handles API routes, auth
 | `src/lib/` | Shared utilities (session, user-store, cn) |
 | `src/components/ui/` | 48 shadcn/ui components |
 | `api/` | Standalone Vercel serverless functions |
+| `railway.toml` | Railway one-click deploy config |
+| `render.yaml` | Render one-click deploy config |
 
 ---
 
@@ -288,6 +321,8 @@ WorldIntelligence/
 |-- LICENSE                 # MIT
 |-- next.config.ts
 |-- package.json
+|-- railway.toml            # Railway deploy config
+|-- render.yaml             # Render deploy config
 |-- tailwind.config.ts
 |-- tsconfig.json
 |-- vercel.json             # Vercel deployment config + CSP headers
